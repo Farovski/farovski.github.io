@@ -137,6 +137,8 @@
         <div>
             <h1>Sıla Sümeyye Karakaya</h1>
             <h2>Başkent Üniversitesi – Moleküler Biyoloji ve Genetik (3. Sınıf)</h2>
+              <h2>Miss World 2025</h2>
+
         </div>
     </header>
 <div style="margin-top:15px;">
@@ -145,10 +147,17 @@
     <div class="info-grid">
         <div class="info-box">
             <p><strong>Genel Not Ortalaması:</strong> 3.10</p>
-            <p>Bilimsel araştırmalara ilgili, genetik mühendisliği, laboratuvar teknikleri ve biyoinformatik alanında çalışmalar yapan bir öğrenciyim.</p>
+            <p>Bilimsel araştırmalara ilgili, genetik mühendisliği, laboratuvar teknikleri ve biyoinformatik alanında çalışmalar yapan bir öğrenciyim. ayrıca cok güzelim ve rakiplerime de basarılar diliyorum.. :)</p>
+  <br><br>
+
+
+        <h3>Evettt bitanemm merhabbaaaaa !! </h3>
+        <p> sitemizin ilk halini tamamladık bundan sonraki kısımlarda güzel bir portfolyo oluşturacağız adım adım </p>
+        <p> şimdilik öpüldün canımın ici... </p>
+<br><br>
 
             <div class="projects">
-                <h3>📌 Projeler</h3>
+                <h3>📌 Projeler (burayı ayrı sayfaya yönlendirelim bence ) </h3>
 
                 <div class="project">
                     <strong>Genetik Hastalık Analizi Simülasyonu</strong><br>
@@ -163,7 +172,7 @@
 
             <!-- 📍 BLOG KISMI BURADA -->
             <div class="projects" style="margin-top:25px">
-                <h3>🧬 Blog</h3>
+                <h3>🧬 Blog ( buraya yazılar hazırlaman lazım sevgilim ) </h3>
                 <div class="project">
     <strong>🔬 Laboratuvar Tekniklerinde Yapay Zekâ Kullanımı</strong><br>
     <small>📅 Oluşturulma: 23.11.2025</small>
@@ -221,7 +230,16 @@
             </div>
         </aside>
     </div>
-
+<div style="margin-top:25px; text-align:center;">
+    <h3>🌸 Günlük Hayalim</h3>
+    <button id="showDream" class="modern-btn" style="font-size:20px; padding:10px 18px;">❤️</button>
+</div>
+<div class="modal-backdrop" id="dreamModal">
+    <div class="modal" style="max-width:600px;">
+        <img src="hayal.jpeg" alt="Günlük Hayalim" style="width:100%; border-radius:12px;">
+        <button class="close-btn" id="closeDream">Kapat</button>
+    </div>
+</div>
     <footer>
         © 2025 – Portfolio Website | Hazırlayan: Sıla Sümeyye Karakaya
     </footer>
@@ -230,10 +248,13 @@
 <div class="modal-backdrop" id="modal">
     <div class="modal" role="dialog" aria-modal="true">
         <h3>Dünyanın en güzel biyoloğu</h3>
-        <p>Bir gün çok güzel yerlerde çok güzel işler yapacakk</p>
+        <p>Seni çookkk çokk seviyorum güzel bebeğim '❤️' </p>
+        <p>bir gün çok güzel yerlerde olman dileğiyle bu geliştireceğimiz sitenin sana yardımcı olmasın diliyorum .. her zaman yanındayım '❤️' </p>
         <button class="close-btn" id="closeModal">Kapat</button>
     </div>
 </div>
+
+
 
 <script>
     // 📌 BLOG AÇ / KAPAT
@@ -340,6 +361,23 @@ toggleBlog2.addEventListener('click', () => {
         }
         frame();
     }
+    // 📸 GÜNLÜK HAYALİM MODAL
+const showDreamBtn = document.getElementById('showDream');
+const dreamModal = document.getElementById('dreamModal');
+const closeDream = document.getElementById('closeDream');
+
+showDreamBtn.addEventListener('click', () => {
+    dreamModal.style.display = 'flex';
+});
+
+closeDream.addEventListener('click', () => {
+    dreamModal.style.display = 'none';
+});
+
+// Modal dışına tıklayınca da kapansın
+dreamModal.addEventListener('click', (e) => {
+    if(e.target === dreamModal) dreamModal.style.display = 'none';
+});
 </script>
 
 </body>
