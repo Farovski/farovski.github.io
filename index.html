@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sıla Sümeyye Karakaya</title>
+    <style>
+        :root{
+            --card-bg: rgba(255,255,255,0.9);
+            --accent: #0066ff;
+            --muted: #6b7280;
+        }
+        *{box-sizing:border-box}
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+       background: linear-gradient(180deg, #ffe4f0, #ffffff);
+            margin: 0;
+            padding: 40px 20px;
+            color: #222;
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+        .container {
+            width:100%;
+            max-width:900px;
+            margin: 0 auto;
+            padding: 28px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(16,24,40,0.08);
+            backdrop-filter: blur(6px);
+        }
+        header{
+            display:flex;
+            gap:20px;
+            align-items:center;
+        }
+        .profile-img-wrap{display:flex;flex-direction:column;align-items:center;min-width:150px}
+        .profile-image {
+            width:150px;height:150px;object-fit:cover;border-radius:50%;
+            box-shadow: 0 8px 24px rgba(2,6,23,0.12); border:4px solid #fff;
+        }
+        h1{font-size:28px;margin:0}
+        h2{font-size:15px;color:var(--muted);margin:6px 0 0}
+        .info-grid{
+            display:grid;
+            grid-template-columns: 1fr 300px;
+            gap:20px;
+            margin-top:22px;
+        }
+        .info-box, .side {
+            background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.85));
+            border-radius:12px;
+            padding:18px;
+        }
+        .projects{margin-top:16px}
+        .project{background:#fff;padding:12px;border-radius:10px;margin-bottom:10px;border-left:5px solid var(--accent);box-shadow:0 2px 8px rgba(2,6,23,0.03)}
+        footer{ text-align:center;font-size:13px;color:var(--muted);margin-top:18px }
+
+        /* Blog içerik kutusu */
+        #blogContent {
+            background: #f8faff;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            line-height: 1.55;
+            display: none;
+        }
+
+        .btn{
+            background:linear-gradient(180deg,var(--accent),#004ecb);
+            color:white;border:none;padding:10px 16px;border-radius:10px;cursor:pointer;font-weight:600;
+            box-shadow:0 8px 20px rgba(2,6,23,0.12);
+        }
+        .btn:active{transform:translateY(1px)}
+
+        /* Balon, modal ve konfeti CSS (mevcut) */
+        .balloon-wrap{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px}
+        .balloon{
+            width:90px;height:120px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
+            background: linear-gradient(180deg,#ff7bac 0%, #ff4f7c 60%);
+            position:relative;display:flex;align-items:center;justify-content:center;
+            transform-origin:50% 100%;
+            transition: transform .25s ease, opacity .25s ease;
+            box-shadow: 0 12px 30px rgba(255,75,110,0.18), inset 0 -8px 20px rgba(0,0,0,0.05);
+        }
+        .balloon::after{content:"";width:2px;height:40px;background:#7a6a6a;position:absolute;bottom:-40px;left:50%;transform:translateX(-50%)}
+        .pop-burst{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0}
+        #confettiCanvas{position:fixed;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:70}
+        .modal-backdrop{position:fixed;inset:0;background:rgba(2,6,23,0.45);display:none;align-items:center;justify-content:center;z-index:60}
+        .modal{background:#fff;padding:22px;border-radius:12px;max-width:420px;text-align:center;box-shadow:0 30px 60px rgba(2,6,23,0.25)}
+        .close-btn{margin-top:14px;background:#eee;border:none;padding:10px 14px;border-radius:8px;cursor:pointer}
+
+        @media (max-width:760px){
+            .info-grid{grid-template-columns:1fr; }
+            header{flex-direction:column;align-items:flex-start}
+            .profile-img-wrap{flex-direction:row;gap:12px}
+        }
+        .modern-btn {
+    display: inline-block;
+    padding: 12px 22px;
+    border-radius: 14px;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+    transition: all .35s ease;
+    background: linear-gradient(135deg, #ff4f7c, #ff8ab8);
+    box-shadow: 0 8px 20px rgba(255, 75, 110, 0.3);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.modern-btn:hover {
+    transform: scale(1.07) translateY(-2px);
+    box-shadow: 0 12px 30px rgba(255, 75, 110, 0.45);
+    background: linear-gradient(135deg, #ffa2cc, #ff4f7c);
+}
+.modern-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 4px 8px rgba(255, 75, 110, 0.2);
+}
+    </style>
+</head>
+<body>
+
+<canvas id="confettiCanvas"></canvas>
+
+<div class="container">
+    <header>
+        <div class="profile-img-wrap">
+            <img src="deneme1.jpeg" alt="Profil Fotoğrafı" class="profile-image">
+        </div>
+        <div>
+            <h1>Sıla Sümeyye Karakaya</h1>
+            <h2>Başkent Üniversitesi – Moleküler Biyoloji ve Genetik (3. Sınıf)</h2>
+        </div>
+    </header>
+<div style="margin-top:15px;">
+    <a href="clock.html" class="modern-btn">⏰ Clock</a>
+</div>
+    <div class="info-grid">
+        <div class="info-box">
+            <p><strong>Genel Not Ortalaması:</strong> 3.10</p>
+            <p>Bilimsel araştırmalara ilgili, genetik mühendisliği, laboratuvar teknikleri ve biyoinformatik alanında çalışmalar yapan bir öğrenciyim.</p>
+
+            <div class="projects">
+                <h3>📌 Projeler</h3>
+
+                <div class="project">
+                    <strong>Genetik Hastalık Analizi Simülasyonu</strong><br>
+                    <small>CRISPR-Cas9 yöntemleri üzerine araştırma.</small>
+                </div>
+
+                <div class="project">
+                    <strong>Mikroorganizmalarda DNA Mutasyon Takibi</strong><br>
+                    <small>Bioinformatics platformunda analiz.</small>
+                </div>
+            </div>
+
+            <!-- 📍 BLOG KISMI BURADA -->
+            <div class="projects" style="margin-top:25px">
+                <h3>🧬 Blog</h3>
+                <div class="project">
+    <strong>🔬 Laboratuvar Tekniklerinde Yapay Zekâ Kullanımı</strong><br>
+    <small>📅 Oluşturulma: 23.11.2025</small>
+    <p style="margin-top:6px">
+        Günümüzde yapay zekâ, moleküler biyoloji laboratuvarlarında veri analizi süreçlerini hızlandırarak...
+    </p>
+
+    <!-- Gizli uzun içerik -->
+    <div id="blogContent2" style="display:none; margin-top:6px;">
+        <p>
+            Yapay zekâ destekli algoritmalar özellikle gen dizilimi analizlerinde,
+            protein yapı tahminlerinde ve ilaç moleküllerinin etkileşim modellemelerinde
+            araştırmacılara büyük hız kazandırmaktadır. Laboratuvarlarda deneysel süreçlerden
+            elde edilen büyük biyolojik veriler, klasik yöntemlerle analiz edilmesi oldukça zaman
+            alıcıdır. AI tabanlı sistemler bu verileri saniyeler içinde sınıflandırabilir,
+            sonuç tahminlerinde bulunabilir ve hatalı deney ihtimalini azaltarak maliyet avantajı sağlar.
+            Ancak bu teknolojilerin doğru kullanımı için biyolojik bilgilerin yanında veri bilimi eğitimi
+            de önemli hale gelmektedir.
+        </p>
+    </div>
+
+    <button id="toggleBlog2" class="btn" style="margin-top:8px;">Devamını Oku</button>
+</div>
+                <div class="project">
+                    <strong>🧪 Moleküler Biyolojide Genetik Düzenleme Tekniklerinin Geleceği</strong><br>
+                    <small>📅 Oluşturulma: 23.11.2025</small>
+                    <p style="margin-top:6px">
+                        CRISPR-Cas9 teknolojisiyle birlikte gen düzenleme bilim dünyasında devrim yarattı...
+                    </p>
+                    <div id="blogContent">
+                        <p>
+                            CRISPR-Cas9 sistemi, DNA dizilerinde belirli bölgeleri hedef alarak düzenlemeye olanak tanır.
+                            Bu yöntem sayesinde genetik hastalıkların tedavi edilmesi, bitkilerde verim artışı sağlanması
+                            ve hatta bazı kalıtsal rahatsızlıkların aktarımının engellenmesi mümkün hale gelmektedir.
+                            Gelecekte bu teknolojiler yapay zekâ ile birleşerek çok daha etkili çalışacaktır. Ancak etik
+                            sınırların doğru belirlenmesi büyük önem taşır.
+                        </p>
+                    </div>
+                    <button id="toggleBlog" class="btn" style="margin-top:8px;">Devamını Oku</button>     
+                </div>
+            </div>
+        </div>
+
+        <aside class="side">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+                <h3 style="margin:0">🎉 Eğlence</h3>
+                <small style="color:var(--muted)">Hadi biraz kutlayalım</small>
+            </div>
+
+            <div class="balloon-wrap" style="margin-top:12px">
+                <div class="balloon" id="balloon">
+                    <div class="pop-burst" id="burst"></div>
+                </div>
+                <button class="btn" id="popBtn">Balon Patlat!</button>
+            </div>
+        </aside>
+    </div>
+
+    <footer>
+        © 2025 – Portfolio Website | Hazırlayan: Sıla Sümeyye Karakaya
+    </footer>
+</div>
+
+<div class="modal-backdrop" id="modal">
+    <div class="modal" role="dialog" aria-modal="true">
+        <h3>Dünyanın en güzel biyoloğu</h3>
+        <p>Bir gün çok güzel yerlerde çok güzel işler yapacakk</p>
+        <button class="close-btn" id="closeModal">Kapat</button>
+    </div>
+</div>
+
+<script>
+    // 📌 BLOG AÇ / KAPAT
+    const toggleBlog = document.getElementById('toggleBlog');
+    const blogContent = document.getElementById('blogContent');
+const toggleBlog2 = document.getElementById('toggleBlog2');
+const blogContent2 = document.getElementById('blogContent2');
+
+toggleBlog2.addEventListener('click', () => {
+    if (blogContent2.style.display === 'none' || blogContent2.style.display === '') {
+        blogContent2.style.display = 'block';
+        toggleBlog2.textContent = 'Kapat';
+    } else {
+        blogContent2.style.display = 'none';
+        toggleBlog2.textContent = 'Devamını Oku';
+    }
+});
+    toggleBlog.addEventListener('click', () => {
+        if (blogContent.style.display === 'none' || blogContent.style.display === '') {
+            blogContent.style.display = 'block';
+            toggleBlog.textContent = 'Kapat';
+        } else {
+            blogContent.style.display = 'none';
+            toggleBlog.textContent = 'Devamını Oku';
+        }
+    });
+
+    // Mevcut JS (balon patlatma + konfeti)
+    const popBtn = document.getElementById('popBtn');
+    const balloon = document.getElementById('balloon');
+    const burst = document.getElementById('burst');
+    const modal = document.getElementById('modal');
+    const closeModal = document.getElementById('closeModal');
+
+    function createBurst(xCount=12){
+        burst.innerHTML='';
+        for(let i=0;i<xCount;i++){
+            const s = document.createElement('span');
+            s.style.background = ['#ffd166','#06d6a0','#ef476f','#118ab2','#8338ec'][i%5];
+            burst.appendChild(s);
+        }
+        burst.style.opacity = 1;
+        const nodes = burst.querySelectorAll('span');
+        nodes.forEach((n, i) => {
+            const ang = (i / nodes.length) * Math.PI * 2;
+            const dist = 60 + Math.random()*30;
+            n.animate([
+                { transform: 'translate(0,0) scale(1)', opacity:1 },
+                { transform: `translate(${Math.cos(ang)*dist}px, ${Math.sin(ang)*dist}px) scale(.8)`, opacity:0 }
+            ], { duration: 700 + Math.random()*300, easing: 'cubic-bezier(.2,.8,.2,1)'});
+        });
+        setTimeout(()=> burst.style.opacity = 0, 800);
+    }
+
+    popBtn.addEventListener('click', () => {
+        balloon.style.transition = 'transform .18s ease, opacity .25s ease';
+        balloon.style.transform = 'scale(.2) rotate(-8deg)';
+        balloon.style.opacity = '0';
+        createBurst(14);
+        runConfetti();
+        setTimeout(()=> modal.style.display = 'flex', 450);
+        setTimeout(()=>{
+            balloon.style.transition = 'none';
+            balloon.style.transform = 'scale(1)';
+            balloon.style.opacity = '1';
+        }, 1300);
+    });
+
+    closeModal.addEventListener('click', ()=> modal.style.display='none');
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.style.display='none' });
+
+    const canvas = document.getElementById('confettiCanvas');
+    const ctx = canvas.getContext('2d');
+    let W = canvas.width = window.innerWidth;
+    let H = canvas.height = window.innerHeight;
+    window.addEventListener('resize', ()=>{ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; });
+
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+
+    function runConfetti(){
+        const pieces = [];
+        const colors = ['#ff477e','#ffd166','#06d6a0','#118ab2','#8338ec','#ffb4a2'];
+        for(let i=0;i<120;i++){
+            pieces.push({x: W/2,y: H/2,vx: rand(-6,6),vy: rand(-12,-2),r: rand(4,9),color: colors[i%colors.length],rot: rand(0,360),vr: rand(-8,8),gravity: 0.35 + Math.random()*0.25,life: 0});
+        }
+        let t = 0;
+        function frame(){
+            ctx.clearRect(0,0,W,H);
+            for(const p of pieces){
+                p.vy += p.gravity;
+                p.x += p.vx;
+                p.y += p.vy;
+                p.rot += p.vr;
+                p.life++;
+                ctx.save();
+                ctx.translate(p.x,p.y);
+                ctx.rotate(p.rot * Math.PI / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*1.6);
+                ctx.restore();
+            }
+            if(t++ < 120) requestAnimationFrame(frame);
+            else ctx.clearRect(0,0,W,H);
+        }
+        frame();
+    }
+</script>
+
+</body>
+</html>

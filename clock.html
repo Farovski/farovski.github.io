@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Canlı Dijital Saat - Sıla</title>
+<style>
+  :root{
+    --bg:#ffeaf2;
+    --card-rgba: rgba(255,255,255,0.65);
+    --accent:#ff4f7c;
+    --accent-dark:#cc3a63;
+    --muted:#8b8590;
+  }
+
+  *{box-sizing:border-box}
+  html,body{
+    height:100%;margin:0;
+    font-family:"Segoe UI",Roboto,Arial,sans-serif;
+    background:linear-gradient(180deg, var(--bg), #ffffff 90%);
+    color:#333;
+  }
+
+  .stage{
+    height:100vh;display:flex;align-items:center;justify-content:center;
+    perspective:1100px;
+    padding:24px;
+    position: relative;
+  }
+
+  /* Ana sayfaya dön butonu */
+  a.back-btn {
+    position:absolute;left:20px;top:20px;
+    text-decoration:none;
+    font-weight:600;
+    padding:8px 14px;
+    font-size:14px;
+    border-radius:12px;
+    background:rgba(255,79,124,0.08);
+    color:var(--accent);
+    backdrop-filter:blur(4px);
+    transition:all .3s ease;
+  }
+  a.back-btn:hover {
+    background:rgba(255,79,124,0.16);
+    transform:scale(1.05);
+  }
+
+  /* Saat kartı */
+  .card-3d{
+    width:380px;max-width:92vw;padding:30px;border-radius:20px;
+    background: var(--card-rgba);
+    backdrop-filter: blur(10px) saturate(160%);
+    box-shadow: 0 20px 50px rgba(255,79,124,0.18);
+    transform-style:preserve-3d;
+    transition: transform 300ms cubic-bezier(.2,.8,.2,1);
+    display:flex;flex-direction:column;align-items:center;gap:20px;
+    position:relative;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .card-3d.tilt{ transform: rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)); }
+
+  .facet{
+    position:absolute;inset:0;border-radius:20px;pointer-events:none;
+    background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.02));
+    mix-blend-mode:overlay;transform: translateZ(10px);
+  }
+
+  .card-inner{width:100%;display:flex;flex-direction:column;align-items:center;gap:10px;z-index:2;}
+  .label{font-size:14px;color:var(--muted);letter-spacing:0.6px}
+
+  /* Saat görünümü */
+  .digital{
+    width:260px;height:120px;border-radius:16px;
+    display:flex;align-items:center;justify-content:center;
+    background: linear-gradient(180deg, rgba(255,79,124,0.95), rgba(212,65,99,0.95));
+    color:white;font-weight:600;font-size:38px;
+    box-shadow:0 18px 40px rgba(255,79,124,0.25), inset 0 -8px 20px rgba(255,255,255,0.04);
+    transform: translateZ(30px);
+    letter-spacing:2px;
+  }
+
+  .sub{font-size:13px;color: #ff9fbd;margin-top:4px}
+
+  .tree {
+    position:fixed;z-index:9999;font-size:30px;
+    pointer-events:none;opacity:0;
+    transform:translateY(15px) scale(.9);
+    transition: opacity .28s ease, transform .85s cubic-bezier(.16,.9,.3,1);
+    text-shadow: 0 4px 15px rgba(255,79,124,0.35);
+  }
+
+  /* SAYFA IŞIK GEÇİŞ ANİMASYONU */
+  #light-effect {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 15vw;
+    height: 15vw;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.9), rgba(255,79,124,0.4), transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+    filter: blur(35px);
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 1s cubic-bezier(.2,.8,.2,1), opacity 1s cubic-bezier(.2,.8,.2,1);
+  }
+
+  /* Her 10 saniyede random çıkan kalpler */
+  .heart {
+    position: fixed;
+    font-size: 22px;
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  @media (max-width:420px){
+    .digital{font-size:28px;width:220px;height:96px}
+  }
+</style>
+</head>
+
+<body>
+  <!-- Işık efekti -->
+  <div id="light-effect"></div>
+
+  <div class="stage" id="stage">
+    <a href="index.html" class="back-btn">← Ana Sayfaya Dön</a>
+
+    <div class="card-3d" id="card" role="region" aria-label="Dijital saat kartı">
+      <div class="facet"></div>
+
+      <div class="card-inner">
+        <div class="label">Canlı Dijital Saat</div>
+        <div class="digital" id="digitalTime">--:--:--</div>
+        <div class="sub" id="dateLabel">—</div>
+      </div>
+    </div>
+  </div>
+
+<script>
+  /* ⏰ Saat Güncelleme */
+  const timeEl = document.getElementById('digitalTime');
+  const dateLabel = document.getElementById('dateLabel');
+  const days = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function updateClock(){
+    const now = new Date();
+    timeEl.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+    dateLabel.textContent = `${days[now.getDay()]} • ${now.getDate()}/${now.getMonth()+1}/${now.getFullYear()}`;
+  }
+  updateClock(); setInterval(updateClock, 1000);
+
+  /* 🌸 Işık animasyonu */
+  window.addEventListener('load', () => {
+    const light = document.getElementById('light-effect');
+    requestAnimationFrame(() => {
+      light.style.transform = 'translate(-50%, -50%) scale(3)';
+      light.style.opacity = '0.8';
+    });
+    setTimeout(() => {
+      light.style.opacity = '0';
+      light.style.transform = 'translate(-50%, -50%) scale(5)';
+    }, 800);
+    setTimeout(() => light.remove(), 1800);
+  });
+
+  /* 💖 Her 10 saniyede random kalp ekranda kalsın */
+  setInterval(() => {
+    const heart = document.createElement('div');
+    heart.className = 'heart';
+    heart.textContent = '❤️';
+
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    heart.style.left = Math.random() * (vw - 40) + 'px';
+    heart.style.top = Math.random() * (vh - 40) + 'px';
+
+    document.body.appendChild(heart);
+  }, 10000);
+
+  /* 🔄 3D hover efekti */
+  const stage = document.getElementById('stage');
+  const card = document.getElementById('card');
+  stage.addEventListener('mousemove', (e) => {
+    const rect = stage.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = (e.clientX - cx) / rect.width;
+    const dy = (e.clientY - cy) / rect.height;
+    card.style.setProperty('--rx', (-dy * 6).toFixed(2) + 'deg');
+    card.style.setProperty('--ry', (dx * 8).toFixed(2) + 'deg');
+    card.classList.add('tilt');
+  });
+  stage.addEventListener('mouseleave', () => {
+    card.style.setProperty('--rx', '0deg');
+    card.style.setProperty('--ry', '0deg');
+    card.classList.remove('tilt');
+  });
+</script>
+</body>
+</html>
