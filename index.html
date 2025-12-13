@@ -718,7 +718,7 @@
         localStorage.setItem('theme', next);
     });
 
-    function updateCounter(){
+   function updateCounter(){
     const today = new Date();
     const targetDate = new Date("2026-01-05");
 
@@ -732,14 +732,18 @@
     const counter = document.getElementById("dayCounter");
 
     if(diffDays > 0){
-        counter.textContent = `⏳ 5 Ocak 2026’ya ${diffDays} gün kaldı`;
-    }else if(diffDays === 0){
-        counter.textContent = "🎉 Bugün büyük gün!";
-    }else{
-        counter.textContent = "✨ Tarih geçti";
+        counter.textContent = `⏳Finallere ${diffDays} gün kaldı 3. sınıfın yarısı bitiyor... `;
+    } 
+    else if(diffDays === 0){
+        counter.textContent = "🎉 Bugün büyük gün! Sınavında başarılar bitanem..";
+    } 
+    else{
+        counter.textContent = "✨ Umarım her şey istediğin gibi gidiyordur...";
     }
+}
         updateCounter();
 </script>
 
 </body>
 </html>
+
