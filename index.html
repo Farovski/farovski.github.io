@@ -53,7 +53,7 @@
             display:flex;
             justify-content:flex-end;
             align-items:center;
-            margin-bottom: 14px;
+            margin-bottom: 2px;
             gap: 10px;
         }
 
@@ -381,27 +381,32 @@
             transform: scale(0.98);
             box-shadow: 0 4px 8px rgba(255, 75, 110, 0.2);
         }
-        .counter-box{
-    margin-top:12px;
-    padding:14px 20px;
-    border-radius:14px;
-    font-size:18px;
-    font-weight:600;
-    text-align:center;
-    background: linear-gradient(135deg,#6366f1,#4f46e5);
-    color:white;
-    box-shadow:0 10px 25px rgba(79,70,229,0.4);
-    display:inline-block;
-}
 
-:root[data-theme="dark"] .counter-box{
-    background: linear-gradient(135deg,#38bdf8,#0284c7);
-}
+        /* Modern ve yumuşak detay metni için özel stil */
+        .details-modern {
+            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
+            font-size: 0.9em;
+            color: #444;
+            background: linear-gradient(90deg, #f8fafc 60%, #e0e7ef 100%);
+            border-radius: 14px;
+            padding: 18px 22px 16px 22px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            letter-spacing: 0.01em;
+            line-height: 1.7;
+            transition: background .3s, color .3s;
+        }
+        :root[data-theme="dark"] .details-modern {
+            background: linear-gradient(90deg, #23293a 60%, #1a1e29 100%);
+            color: #e5e7eb;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+        }
     </style>
 </head>
 <body>
 
-<canvas id="confettiCanvas"></canvas>
+
 
 <div class="container">
     <!-- Sağ üst CV + Dark Mode -->
@@ -425,75 +430,145 @@
         <div>
             <h1>Sıla Sümeyye Karakaya</h1>
             <h2>Başkent Üniversitesi – Moleküler Biyoloji ve Genetik (3. Sınıf)</h2>
-            <h2>Miss World 2025</h2>
+             <h2>GNO: 2.73</h2>         
         </div>
     </header>
 
-  
-<div class="container">
 
-    <!-- CLOCK BUTONU -->
-    <div style="margin-top:15px;">
-        <a href="clock.html" class="modern-btn">⏰ Clock</a>
-    </div>
-
-    <!-- 🔥 SAYAÇ BURADA -->
-    <div id="dayCounter" class="counter-box">
-        ⏳ Hesaplanıyor...
-    </div>
-    <div class="counter-box">
-       Sana güveniyorum sevgili calışmaya devam.. <3
-    </div>
-
-</div>
-
-    <div class="info-grid">
         <div class="info-box">
-            <p><strong>Genel Not Ortalaması:</strong> 3.10</p>
-            <p>Bilimsel araştırmalara ilgili, genetik mühendisliği, laboratuvar teknikleri ve biyoinformatik alanında çalışmalar yapan bir öğrenciyim. ayrıca cok güzelim ve rakiplerime de basarılar diliyorum.. :)</p>
-            <br><br>
-
-            <h3>Evettt bitanemm merhabbaaaaa !! </h3>
-            <p> sitemizin ilk halini tamamladık bundan sonraki kısımlarda güzel bir portfolyo oluşturacağız adım adım </p>
-            <p> şimdilik öpüldün canımın ici... </p>
-            <br><br>
-
-            <div class="projects">
-                <h3>📌 Projeler (burayı ayrı sayfaya yönlendirelim bence ) </h3>
-
+            <h3>🌿 Hakkımda </h3>
+            <p> Bilime duyduğum merak ve canlı sistemleri anlama isteği beni moleküler biyoloji alanına yönlendirdi. Başkent Üniversitesi’nde tam burslu olarak İngilizce Moleküler Biyoloji ve Genetik eğitimi alıyor, akademik gelişimimi araştırma deneyimleriyle destekliyorum. Hedefim, edindiğim teorik bilgiyi gerçek biyolojik problemlere uygulayabilen bir araştırmacı olmak.</p>
+            <p>Hacettepe Üniversitesi GenVA Laboratuvarı’ndaki stajımda moleküler genetik analizler ve laboratuvar teknikleri üzerine çalıştım; deney tasarlama ve bilimsel veriyi yorumlama konusunda deneyim kazandım. EKAD bünyesindeki gönüllü saha çalışmalarım ise çevresel farkındalığımı ve biyolojinin doğayla olan bağını güçlendirdi</p>
+         <p>Kök Hücre ve Doku Mühendisliği alanındaki gönüllü stajımda biyomalzeme temelli yapay doku üretimi çalışmalarında yer aldım. Bu deneyim, biyolojinin onarım ve tedavi potansiyeline olan ilgimi derinleştirdi.</p>
+         <p>Gelecekte moleküler biyoloji, genetik ve rejeneratif tıp alanlarını birleştiren çalışmalarda yer alarak hastalıkların mekanizmalarını anlamaya ve yeni tedavi yaklaşımlarına katkı sağlamayı hedefliyorum.</p>  
+         <div class="projects">
+                <h3> Deneyimlerim </h3>
                 <div class="project">
-                    <strong>Genetik Hastalık Analizi Simülasyonu</strong><br>
-                    <small>CRISPR-Cas9 yöntemleri üzerine araştırma.</small>
+                    <strong>GenVA Stajı (22 Haziran – 19 Temmuz 2025)</strong><br>
+                    <small>Kısa: Drosophila melanogaster’in çevresel stres koşullarındaki genetik adaptasyonlarını ve varyasyonlarını incele...</small>
+                    <details style="margin-top:6px">
+                        <summary>Daha fazla</summary>
+                        <div class="details-modern">
+                        Hacettepe Üniversitesi Genetik Varyasyon ve Adaptasyon Laboratuvarı’nda, Doç. Dr. Banu Şebnem Önder’in yanında gönüllü staj yaptım. Bu süreçte Drosophila melanogaster’in kuraklık, açlık ve çeşitli çevresel stres koşulları altındaki genetik adaptasyonlarını ve varyasyonlarını inceleme fırsatı buldum. Gen ekspresyon aşamalarına katıldım; besi yeri hazırlama ve meyve sineklerinin çoğaltılması süreçlerinde aktif rol aldım. Ayrıca moleküler analizlere dahil olarak çeşitli PCR ve agaroz jel elektroforezi cihazlarını kullandım,elde edilen sonuçlar üzerine incelemeler yaparak araştırma süreçlerine katkı sağladım.
+                        </div>
+                    </details>
                 </div>
 
                 <div class="project">
-                    <strong>Mikroorganizmalarda DNA Mutasyon Takibi</strong><br>
-                    <small>Bioinformatics platformunda analiz.</small>
+                    <strong>EKAD (31 Ağustos – 14 Eylül 2025)</strong><br>
+                    <small>Kısa: EKAD (Ekolojik Araştırmalar Derneğinde) gönüllü çalışmalara katıld...</small>
+                    <details style="margin-top:6px">
+                        <summary>Daha fazla</summary>
+                        <div class="details-modern">
+                        EKAD (Ekolojik Araştırmalar Derneğinde) gönüllü çalışmalara katıldım. Kentleşme, ışıklandırma, çevre kirliliği ve benzeri pek çok tehdit nedeniyle nesilleri tükenme tehlikesi altında olan caretta caretta türünü korumaya yönelik saha çalışmalarında yer aldım. Düzenli olarak arazilere çıkarak yuvaların tespit edilmesi ve belirlenen yuvaların korunmasına yönelik çalışmalara katıldık. Yavruların yuvadan çıkıp güvenli şekilde denize ulaşabilmesi için gerekli önlemleri aldık, tüm gözlemleri kayıt altına aldık ve kamp alanındaki çalışma düzenine uyum sağladık.
+                        </div>
+                    </details>
+                </div>
+                <div class="project">
+                    <strong>İstinye Üni. Kök Hücre ve Doku Mühendisliği Labaratuvarı (18 Ocak – 14 Şubat)</strong><br>
+                    <small>Kısa: İstinye Üniversitesi Kök Hücre ve Doku Mühendisliği Laboratuvarı’nd..</small>
+                    <details style="margin-top:6px">
+                        <summary>Daha fazla</summary>
+                        <div class="details-modern">
+                        İstinye Üniversitesi Kök Hücre ve Doku Mühendisliği Laboratuvarı’nda, Doç. Dr. Ayça Bal Öztürk’ün yanında gönüllü staj yaptım. Bu laboratuvarda kök hücreler kullanılarak biyo uyumlu malzemeler üretilmekte; hasarlı doku onarımı, yara iyileşmesi ve çeşitli biyomalzemelerin geliştirilmesi üzerine çalışmalar yürütülmektedir. Ben de kimyasal hesaplamalarla malzeme üretimi ve bu malzemelerin optimizasyonu süreçlerine katıldım, FTIR cihazı ile yapılan karakterizasyon çalışmalarına eşlik ettim. Elektrospinning cihazı kullanarak makro ve mikro boyutta, doku onarımı ve çeşitli kozmetik uygulamalarda kullanılabilecek ince liflerin üretiminde görev aldım. Ayrıca hücre kültürü aşamalarına ve aseptik tekniklerin uygulanmasına dahil oldum. 3D yazıcı ile hücre dışı matriksi taklit eden, yine biyo uyumlu üç boyutlu yapılar üretilmesi çalışmalarında da yer aldım.
+                        </div>
+                    </details>
                 </div>
             </div>
 
             <!-- 📍 BLOG KISMI -->
-            <div class="projects" style="margin-top:25px">
-                <h3>🧬 Blog ( buraya yazılar hazırlaman lazım sevgilim ) </h3>
+            <div class="projects" style="margin-top:55px">
+                <h3>🧬 Blog Yazılarım  </h3>
 
                 <div class="project">
-                    <strong>🔬 Laboratuvar Tekniklerinde Yapay Zekâ Kullanımı</strong><br>
+                    <strong>🔬 Drosophila melanogaster: Genetik ve Gelişim Biyolojisinin Temel Model Organizması</strong><br>
                     <small>📅 Oluşturulma: 23.11.2025</small>
-                    <p style="margin-top:6px">
-                        Günümüzde yapay zekâ, moleküler biyoloji laboratuvarlarında veri analizi süreçlerini hızlandırarak...
+                    <p style="margin-top:10px">
+                         Drosophila melanogaster, halk arasında meyve sineği olarak bilinen küçük bir böcekt...
                     </p>
 
                     <!-- Gizli uzun içerik -->
                     <div id="blogContent2" style="margin-top:6px;">
                         <p>
-                            Yapay zekâ destekli algoritmalar özellikle gen dizilimi analizlerinde,
-                            protein yapı tahminlerinde ve ilaç moleküllerinin etkileşim modellemelerinde
-                            araştırmacılara büyük hız kazandırmaktadır. Laboratuvarlarda deneysel süreçlerden
-                            elde edilen büyük biyolojik veriler, klasik yöntemlerle analiz edilmesi oldukça zaman
-                            alıcıdır. AI tabanlı sistemler bu verileri saniyeler içinde sınıflandırabilir,
-                            sonuç tahminlerinde bulunabilir ve hatalı deney ihtimalini azaltarak maliyet avantajı sağlar.
-                            Ancak bu teknolojilerin doğru kullanımı için biyolojik bilgilerin yanında veri bilimi eğitimi
-                            de önemli hale gelmektedir.
+                            <h2>Drosophila melanogaster (Meyve Sineği)</h2>
+
+<p>
+  Drosophila melanogaster, halk arasında meyve sineği olarak bilinen küçük bir böcektir. Ama biyoloji dünyasında yeri inanılmaz büyüktür. Modern genetiğin temelleri bu canlıyla atılmıştır çünkü hem genetiği basittir, yaklaşık 14.000 gen bulunur ki bu sayı insanda 20.000 civarındadır, hem de insanlarla şaşırtıcı derecede ortak biyolojik mekanizmalara sahiptir ve insan hastalık genlerinin yaklaşık %75’inin homologu Drosophila’da da vardır. En büyük avantajlarından biri de hızlı gelişimidir; yumurtadan larvaya, larvadan ise pupa ve erişkin formuna geçmesi 10 gün içinde tamamlanır ve çok hızlı ürer.
+</p>
+
+<h2>Kromozom Yapısı</h2>
+<p>
+  Drosophila’nın 4 çift kromozomu vardır: Bir çift cinsiyet kromozomu (X/Y) ve üç çift otozom kromozom. Bu sayı az gibi görünse de genetik analiz için büyük avantajdır çünkü karmaşıklık düşüktür.
+</p>
+
+<h2>Polytene Kromozomlar</h2>
+<p>
+  Drosophila’nın en ilginç genetik özelliklerinden biri polytene kromozomlardır. Larva dönemindeki tükürük bezlerinde bulunurlar. Bu kromozomlar defalarca DNA eşlenmesi geçirir ama hücre bölünmez, sonuçta dev bantlı kromozomlar oluşur. Bu bantlar mikroskopta görülebilir ve hangi genlerin aktif olduğu fiziksel olarak izlenebilir. Yani gen ekspresyonunu direkt kromozom üzerinde gözlemleyebiliriz.
+</p>
+
+<h2>Gözle Görülebilen Mutasyonlar ve Fenotipler</h2>
+<p>
+  Bu sineklerde mutasyonlar çoğu zaman gözle görülür fenotipler oluşturur. Göz rengi değişebilir, ki buna beyaz göz mutasyonu denir, kanatlar küçülebilir veya kıvrık olabilir ve vücut rengi koyulaşabilir. Bu görünür değişiklikler sayesinde genlerin nasıl aktarıldığı, baskın-çekinik ilişkiler ve crossing-over gibi olaylar net şekilde anlaşılmıştır.
+</p>
+
+<h2>Genetik Manipülasyon: GAL4–UAS Sistemi</h2>
+<p>
+  Drosophila’yı bu kadar güçlü yapan şey sadece doğal genetiği değil, üzerinde genetik manipülasyon yapmanın çok kolay olmasıdır. GAL4–UAS sistemi denen bir sistem araştırmacılara bir geni istediği dokuda, istediği zamanda çalıştırma imkânı verir. Bu, maya (yeast) kökenli yapay bir genetik araçtır. Sistem iki ayrı sinek hattı gerektirir. Tek başlarına bir şey yapmazlar, ama birleşince genler aktifleşir.
+</p>
+<p>
+  Mantığı ise şu şekildedir: İlk sinek hattında GAL4 adlı bir transkripsiyon faktörü üretilir fakat her yerde değil, belirli bir dokuya özgü promotörün kontrolündedir. İkinci sinek hattında ise araştırmak istediğimiz gen bulunur ama bu genin önünde normal promotör yoktur, onun yerine UAS (Upstream Activating Sequence) vardır. UAS tek başına hiçbir şey yapamaz, sadece GAL4 proteini gelirse gen çalışır.
+</p>
+<p>
+  Bu iki hat çaprazlanınca yavrularda iki sistem birleşir: GAL4 proteini üretilir, GAL4 gider UAS dizisine bağlanır, UAS’ın arkasındaki gen çalışmaya başlar AMA sadece GAL4’ün bulunduğu dokuda. Bu sayede sadece sinir hücrelerinde bir geni aktif edebilir, bağırsakta kanser modeli oluşturabiliriz yani insan hastalıklarını modellemede çok yararlıdır.
+</p>
+
+<h2>Embriyonik Gelişim ve Gen Kademeleri</h2>
+<p>
+  Drosophila embriyosu, bir organizmanın sıfırdan nasıl planlandığını anlamamızı sağlamıştır. Döllenmiş yumurta hücresi bölünmeye başlar ama ilk aşamada hücre zarları oluşmaz; çekirdekler ortak sitoplazmada bulunur. Bu sırada anne kökenli gen ürünleri embriyoda belirli bölgelerde yoğunlaşır ve vücudun ön arka ekseni belirlenir.
+</p>
+<p>
+  Sonra gap genleri, pair-rule genleri, segment polarity genleri ve hox genleri kademeli şekilde devreye girer. Hox genleri sayesinde başlangıçta bacak çıkmaz, göğüs segmentinden kanat çıkar. İlginç olan ise hox genleri insanlarda da vardır ve benzer mantıkla çalışır.
+</p>
+
+<h2>Imaginal Disc ve Metamorfoz</h2>
+<p>
+  Larva dönemindeki sinek, erişkine hiç benzemez. Erişkin organların temeli, larvada bulunan imaginal disc adı verilen hücre gruplarıdır. Bunlar gelişmemiş doku taslaklarıdır. Metamorfoz sırasında yapılar, larvanın içindeki bu hücresel taslaklardan yeniden inşa edilir.
+</p>
+
+<h2>Sinir Sistemi Araştırmaları</h2>
+<p>
+  Drosophila aynı zamanda sinir sistemi araştırmalarına da katkı sağlamıştır. Örneğin period geni sirkadiyen ritmi kontrol eder. Bu gen bozulduğunda sineklerin uyku uyanıklık döngüsü değişir. Aynı tip biyolojik saat genleri insanlarda da vardır.
+</p>
+
+<h2>Doğal Popülasyonlarda Genetik Çeşitlilik</h2>
+<p>
+  Doğadaki meyve sineği popülasyonları genetik olarak çok çeşitlidir. Bu çeşitlilik single nucleotide polymorphism yani tek baz değişimleri, gen kopya sayısı değişimleri, transpozon hareketleri gibi mekanizmalarla oluşur. Araştırmacılar farklı doğal sinek hatlarını kullanarak hangi genetik farklılıkların hangi fenotiplere yol açtığını inceler. Bu, insanlardaki genetik hastalık duyarlılığı çalışmalarına çok benzer.
+</p>
+
+<h2>Evrimsel Adaptasyon (GenVA Laboratuvarı Bağlamı)</h2>
+<p>
+  GenVA laboratuvarının da incelediği evrimsel adaptasyonu anlamak için mükemmel bir modeldir.
+</p>
+<ul>
+  <li>
+    Soğuk bölgelerde yaşayan sinekler daha büyük olabilir ve hücre zarları farklı lipid yapısına sahip olabilir. Isı şoku proteinleri stres toleranslarını artırır.
+  </li>
+  <li>
+    Farklı meyvelerde yaşayan türlerde sindirim ve detoksifikasyon genleri değişebilir. Bu, doğal seçilimin moleküler düzeyde izlenmesini sağlar.
+  </li>
+  <li>
+    Bazı popülasyonlar kimyasallara karşı direnç geliştirir. Bu genellikle detoksifikasyon enzimlerini kodlayan genlerdeki mutasyonlardan kaynaklanır. Evrimin laboratuvar ölçeğinde gözlenebilir bir örneğidir.
+  </li>
+</ul>
+
+<h2>Özet</h2>
+<p>
+  Özetlemek gerekirse drosophila bize şunları öğretmiştir: Genler organizmanın düzen ve konumunu nasıl belirler, hücreler organlara nasıl dönüşür, davranışın genetik temeli nedir, evrim moleküler düzeyde nasıl işler ve insan hastalıklarını anlamak için temel biyolojik yollar nasıl çalışır.
+</p>
+<p>
+  Bu yüzden Drosophila, “basit böcek” değil, biyolojinin en güçlü deney sistemlerinden biridir.
+</p>
+
                         </p>
                     </div>
 
@@ -501,65 +576,111 @@
                 </div>
 
                 <div class="project">
-                    <strong>🧪 Moleküler Biyolojide Genetik Düzenleme Tekniklerinin Geleceği</strong><br>
-                    <small>📅 Oluşturulma: 23.11.2025</small>
+                    <strong>🧪Doku Mühendisliğinde Kök Hücre Biyolojisi ve Biyomalzeme Tasarımı</strong><br>
+                    <small>📅 Oluşturulma: 10.12.2025</small>
                     <p style="margin-top:6px">
-                        CRISPR-Cas9 teknolojisiyle birlikte gen düzenleme bilim dünyasında devrim yarattı...
+                        Laboratuvarda çalışılan hücrelerin başında genellikle mezenkimal kök hücreler (MSC) gelir....
                     </p>
                     <div id="blogContent">
-                        <p>
-                            CRISPR-Cas9 sistemi, DNA dizilerinde belirli bölgeleri hedef alarak düzenlemeye olanak tanır.
-                            Bu yöntem sayesinde genetik hastalıkların tedavi edilmesi, bitkilerde verim artışı sağlanması
-                            ve hatta bazı kalıtsal rahatsızlıkların aktarımının engellenmesi mümkün hale gelmektedir.
-                            Gelecekte bu teknolojiler yapay zekâ ile birleşerek çok daha etkili çalışacaktır. Ancak etik
-                            sınırların doğru belirlenmesi büyük önem taşır.
-                        </p>
+                        <h2>Doku Mühendisliği Laboratuvarının Temel Amacı</h2>
+                    <p>
+                    Bu laboratuvarın temel amacı, hasar görmüş dokuların yerini alabilecek ya da iyileşmesini hızlandırabilecek biyolojik olarak uyumlu yapay dokular geliştirmektir. Bunun için sadece hücre kültürü yapmak yetmez; hücrelerin yaşayabileceği, tutunabileceği ve doğru şekilde davranabileceği yapay ortamlar tasarlanır. Doku mühendisliğinin amacı, hücreleri, biyomalzemeleri ve biyolojik sinyalleri bir araya getirerek vücutta bulunan dokulara benzeyen sistemler üretmektir.
+                    </p>
+
+                    <h2>Mezenkimal Kök Hücreler (MSC)</h2>
+                    <p>
+                    Laboratuvarda çalışılan hücrelerin başında genellikle mezenkimal kök hücreler (MSC) gelir. Bu hücreler kemik iliği, yağ dokusu gibi kaynaklardan elde edilebilir ve en önemli özellikleri farklı hücre tiplerine dönüşebilme kapasiteleridir. Uygun sinyaller verildiğinde kemik hücresine, kıkırdak hücresine veya yağ hücresine dönüşebilirler. Bu laboratuvarda hücreleri sadece büyütmeyi değil, onların kaderini yönlendirmeyi öğrenirsin.
+                    </p>
+                    <p>
+                    Hücre kültürü sırasında steril çalışma, hücre pasajlama, dondurma–çözme işlemleri ve hücre sayımı gibi temel ama çok kritik teknikler yoğun şekilde kullanılır.
+                    </p>
+
+                    <h2>Ekstrasellüler Matriks (ECM) ve Scaffold Yapılar</h2>
+                    <p>
+                    Hücreler vücutta boşlukta durmaz; etraflarında ekstrasellüler matriks (ECM) adı verilen destekleyici bir yapı vardır. Doku mühendisliğinde bu yapıyı taklit eden malzemelere <strong>scaffold (iskelet)</strong> denir. Laboratuvarda geliştirilen biyomalzemeler işte bu iskelet görevini görür.
+                    </p>
+
+                    <ul>
+                    <li><strong>Doğal polimerler:</strong> Kolajen, jelatin, kitosan, ipek fibroin — hücreler tarafından daha kolay tanınır ve biyolojik olarak daha uyumludur.</li>
+                    <li><strong>Sentetik polimerler:</strong> PCL, PLA — daha dayanıklıdır ve mekanik özellikleri ayarlanabilir.</li>
+                    </ul>
+
+                    <p>
+                    Bazen bu iki tür malzeme birleştirilerek hem biyolojik hem mekanik olarak uygun yapılar elde edilir. Çünkü bir malzeme hücre davranışını doğrudan etkiler. Yani malzeme sadece pasif bir yüzey değil, hücreye “burada çoğal”, “burada farklılaş” gibi mesajlar veren aktif bir ortamdır.
+                    </p>
+
+                    <h2>Elektrospinning Tekniği</h2>
+                    <p>
+                    Laboratuvarda öne çıkan tekniklerden biri elektrospinningdir. Bu yöntemle nanometre veya mikrometre çapında çok ince lifler üretilir. Bu lifler bir araya gelerek doğal dokuların lifli yapısına benzeyen üç boyutlu ağlar oluşturur. Aslında bu yapı, hücrelerin vücutta yaşadığı doğal ECM’nin yapay bir kopyasıdır.
+                    </p>
+                    <p>
+                    Elektrospinning sırasında polimer çözeltisi yüksek voltaj altında çekilir ve ince lifler halinde toplayıcı yüzeyde birikir. Voltaj, akış hızı, çözücü tipi ve ortam koşulları liflerin kalınlığını ve düzenini değiştirir.
+                    </p>
+
+                    <h2>PVA (Polyvinyl Alcohol)</h2>
+                    <p>
+                    PVA sentetik bir polimerdir ve özellikle yapıya mekanik dayanıklılık kazandırmak için kullanılır. Suda çözünebilen, biyouyumlu ve lif oluşturma kabiliyeti yüksek bir polimerdir. Elektrospinning ile çok ince lifler halinde üretilebilir ve hücrelerin tutunabileceği gözenekli bir ağ yapısı oluşturur.
+                    </p>
+                    <p>
+                    En büyük avantajı doğal polimerlere göre daha dayanıklı ve kontrollü mekanik özelliklere sahip olmasıdır. Bu sayede yapay dokular dağılmaz ve hücreler için stabil bir ortam sağlanır. Ancak biyolojik olarak hücrelere güçlü sinyaller vermez. Bu yüzden genellikle biyolojik olarak aktif malzemelerle birlikte kullanılır.
+                    </p>
+
+                    <h2>GelMA (Gelatin Methacrylate)</h2>
+                    <p>
+                    GelMA, jelatinin kimyasal olarak modifiye edilmiş halidir. Jelatin kolajenden elde edilir ve kolajen vücuttaki en önemli ECM proteinlerinden biridir. Bu nedenle GelMA hücreler tarafından kolayca tanınır ve hücre tutunmasını destekleyen doğal bağlanma bölgeleri içerir.
+                    </p>
+                    <p>
+                    Methacrylate ile modifiye edilmiş olması ona ışıkla çapraz bağlanabilme özelliği kazandırır. UV veya mavi ışık altında sertleşerek hidrojel formuna geçer. Böylece yumuşak, su içeriği yüksek ve doku benzeri bir ortam oluşur.
+                    </p>
+                    <p>
+                    GelMA hücreler için ideal bir mikroçevre sunar ancak mekanik olarak zayıf olabilir. Bu yüzden PVA ile birlikte kullanılır: PVA yapıya güç verirken, GelMA hücrelere biyolojik ortam sağlar.
+                    </p>
+
+                    <h2>3D Biyobaskı (Bioprinting)</h2>
+                    <p>
+                    3D bioprinting, hücreleri düz yüzey yerine üç boyutlu yapılar içine yerleştiren ileri bir teknolojidir. Kullanılan maddelere biyomürekkep denir ve genellikle GelMA bazlıdır. Bu biyomürekkepler canlı hücre içerir ve katman katman yerleştirilerek gerçek dokuya benzeyen yapılar oluşturulur.
+                    </p>
+                    <p>
+                    Bu teknoloji sayesinde yapay deri, kıkırdak dokusu ve tümör modelleri üretilebilir.
+                    </p>
+
+                    <h2>Hücre–Malzeme Etkileşimi Analizleri</h2>
+                    <p>
+                    Üretilen biyomalzeme üzerinde hücrelerin yaşayıp yaşamadığı, yayılıp çoğalıp çoğalmadığı incelenir. Bunun için:
+                    </p>
+                    <ul>
+                    <li>Canlılık testleri</li>
+                    <li>Floresan boyamalar</li>
+                    <li>Mikroskop teknikleri</li>
+                    </ul>
+
+                    <p>
+                    Aynı zamanda malzemenin gözenek yapısı, lif kalınlığı, mekanik dayanıklılığı ve biyobozunurluğu da analiz edilir. Üretmek yetmez, karakterize etmek gerekir.
+                    </p>
+
+                    <h2>Hastalık ve Hasar Modelleri</h2>
+                    <p>
+                    Yapay deri modelleri ile yara iyileşmesi incelenebilir veya tümör benzeri yapılar oluşturularak kanser araştırmaları yapılabilir. Bu modeller ilaçların gerçek dokuya daha yakın koşullarda test edilmesini sağlar. Bu yaklaşım translasyonel araştırma olarak adlandırılır.
+                    </p>
+
+                    <h2>2D’den 3D Doku Mantığına Geçiş</h2>
+                    <p>
+                    Bir doku sadece hücrelerden ibaret değildir; mekanik yapı, kimyasal sinyaller ve fiziksel çevre ile birlikte çalışır. Bu nedenle iki boyutlu kültürden üç boyutlu doku sistemlerine geçiş yapılır.
+                    </p>
+
+                    <h2>Genel Özet</h2>
+                    <p>
+                    Bu laboratuvar kök hücre biyolojisi, biyomalzeme bilimi, nanoteknoloji, elektrospinning, 3D biyobaskı ve doku modelleme gibi alanları birleştirir.
+                    </p>
+
                     </div>
                     <button id="toggleBlog" class="btn" style="margin-top:8px;">Devamını Oku</button>
                 </div>
             </div>
+                        <footer>
+                © 2025 – Portfolio Website | Hazırlayan: Sıla Sümeyye Karakaya
+            </footer>
         </div>
-
-        <aside class="side">
-            <div style="display:flex;justify-content:space-between;align-items:center">
-                <h3 style="margin:0">🎉 Eğlence</h3>
-                <small style="color:var(--muted)">Hadi biraz kutlayalım</small>
-            </div>
-
-            <div class="balloon-wrap" style="margin-top:12px">
-                <div class="balloon" id="balloon">
-                    <div class="pop-burst" id="burst"></div>
-                </div>
-                <button class="btn" id="popBtn">Balon Patlat!</button>
-            </div>
-        </aside>
-    </div>
-
-    <div style="margin-top:25px; text-align:center;">
-        <h3>🌸 Günlük Hayalim</h3>
-        <button id="showDream" class="modern-btn" style="font-size:20px; padding:10px 18px;">❤️</button>
-    </div>
-
-    <div class="modal-backdrop" id="dreamModal">
-        <div class="modal" style="max-width:600px;">
-            <img src="hayal.jpeg" alt="Günlük Hayalim" style="width:100%; border-radius:12px;">
-            <button class="close-btn" id="closeDream">Kapat</button>
-        </div>
-    </div>
-
-    <footer>
-        © 2025 – Portfolio Website | Hazırlayan: Sıla Sümeyye Karakaya
-    </footer>
-</div>
-
-<div class="modal-backdrop" id="modal">
-    <div class="modal" role="dialog" aria-modal="true">
-        <h3>Dünyanın en güzel biyoloğu</h3>
-        <p>Seni çookkk çokk seviyorum güzel bebeğim '❤️' </p>
-        <p>bir gün çok güzel yerlerde olman dileğiyle bu geliştireceğimiz sitenin sana yardımcı olmasın diliyorum .. her zaman yanındayım '❤️' </p>
-        <button class="close-btn" id="closeModal">Kapat</button>
-    </div>
-</div>
 
 <script>
     // 📌 BLOG AÇ / KAPAT
@@ -587,122 +708,6 @@
             toggleBlog.textContent = 'Devamını Oku';
         }
     });
-
-    // Mevcut JS (balon patlatma + konfeti)
-    const popBtn = document.getElementById('popBtn');
-    const balloon = document.getElementById('balloon');
-    const burst = document.getElementById('burst');
-    const modal = document.getElementById('modal');
-    const closeModal = document.getElementById('closeModal');
-
-    function createBurst(xCount=12){
-        burst.innerHTML='';
-        for(let i=0;i<xCount;i++){
-            const s = document.createElement('span');
-            s.style.background = ['#ffd166','#06d6a0','#ef476f','#118ab2','#8338ec'][i%5];
-            s.style.width = '8px';
-            s.style.height = '8px';
-            s.style.borderRadius = '50%';
-            s.style.margin = '2px';
-            burst.appendChild(s);
-        }
-        burst.style.opacity = 1;
-        const nodes = burst.querySelectorAll('span');
-        nodes.forEach((n, i) => {
-            const ang = (i / nodes.length) * Math.PI * 2;
-            const dist = 60 + Math.random()*30;
-            n.animate([
-                { transform: 'translate(0,0) scale(1)', opacity:1 },
-                { transform: `translate(${Math.cos(ang)*dist}px, ${Math.sin(ang)*dist}px) scale(.8)`, opacity:0 }
-            ], { duration: 700 + Math.random()*300, easing: 'cubic-bezier(.2,.8,.2,1)'});
-        });
-        setTimeout(()=> burst.style.opacity = 0, 800);
-    }
-
-    popBtn.addEventListener('click', () => {
-        balloon.style.transition = 'transform .18s ease, opacity .25s ease';
-        balloon.style.transform = 'scale(.2) rotate(-8deg)';
-        balloon.style.opacity = '0';
-        createBurst(14);
-        runConfetti();
-        setTimeout(()=> modal.style.display = 'flex', 450);
-        setTimeout(()=>{
-            balloon.style.transition = 'none';
-            balloon.style.transform = 'scale(1)';
-            balloon.style.opacity = '1';
-        }, 1300);
-    });
-
-    closeModal.addEventListener('click', ()=> modal.style.display='none');
-    modal.addEventListener('click', (e)=>{ if(e.target === modal) modal.style.display='none' });
-
-    const canvas = document.getElementById('confettiCanvas');
-    const ctx = canvas.getContext('2d');
-    let W = canvas.width = window.innerWidth;
-    let H = canvas.height = window.innerHeight;
-    window.addEventListener('resize', ()=>{
-        W = canvas.width = window.innerWidth;
-        H = canvas.height = window.innerHeight;
-    });
-
-    function rand(min,max){ return Math.random()*(max-min)+min; }
-
-    function runConfetti(){
-        const pieces = [];
-        const colors = ['#ff477e','#ffd166','#06d6a0','#118ab2','#8338ec','#ffb4a2'];
-        for(let i=0;i<120;i++){
-            pieces.push({
-                x: W/2,
-                y: H/2,
-                vx: rand(-6,6),
-                vy: rand(-12,-2),
-                r: rand(4,9),
-                color: colors[i%colors.length],
-                rot: rand(0,360),
-                vr: rand(-8,8),
-                gravity: 0.35 + Math.random()*0.25,
-                life: 0
-            });
-        }
-        let t = 0;
-        function frame(){
-            ctx.clearRect(0,0,W,H);
-            for(const p of pieces){
-                p.vy += p.gravity;
-                p.x += p.vx;
-                p.y += p.vy;
-                p.rot += p.vr;
-                p.life++;
-                ctx.save();
-                ctx.translate(p.x,p.y);
-                ctx.rotate(p.rot * Math.PI / 180);
-                ctx.fillStyle = p.color;
-                ctx.fillRect(-p.r/2, -p.r/2, p.r, p.r*1.6);
-                ctx.restore();
-            }
-            if(t++ < 120) requestAnimationFrame(frame);
-            else ctx.clearRect(0,0,W,H);
-        }
-        frame();
-    }
-
-    // 📸 GÜNLÜK HAYALİM MODAL
-    const showDreamBtn = document.getElementById('showDream');
-    const dreamModal = document.getElementById('dreamModal');
-    const closeDream = document.getElementById('closeDream');
-
-    showDreamBtn.addEventListener('click', () => {
-        dreamModal.style.display = 'flex';
-    });
-
-    closeDream.addEventListener('click', () => {
-        dreamModal.style.display = 'none';
-    });
-
-    dreamModal.addEventListener('click', (e) => {
-        if(e.target === dreamModal) dreamModal.style.display = 'none';
-    });
-
     // 🌙 / ☀️ DARK MODE TOGGLE
     const themeToggle = document.getElementById('themeToggle');
     const root = document.documentElement;
@@ -720,35 +725,6 @@
         root.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);
     });
-
-   function updateCounter(){
-    const today = new Date();
-    const targetDate = new Date("2026-01-05");
-
-    // Saat farklarını sıfırla
-    today.setHours(0,0,0,0);
-    targetDate.setHours(0,0,0,0);
-
-    const diffTime = targetDate - today;
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    const counter = document.getElementById("dayCounter");
-
-    if(diffDays > 0){
-        counter.textContent = `⏳Finallere ${diffDays} gün kaldı 3. sınıfın yarısı bitiyor... `;
-    } 
-    else if(diffDays === 0){
-        counter.textContent = "🎉 Bugün büyük gün! Sınavında başarılar bitanem..";
-    } 
-    else{
-        counter.textContent = "✨ Umarım her şey istediğin gibi gidiyordur...";
-    }
-}
-        updateCounter();
 </script>
-
 </body>
 </html>
-
-
-
