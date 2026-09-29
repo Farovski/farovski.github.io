@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="tr" class="h-full dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YÖKDİL & YDS Phrasal Verbs Flashcards</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            900: '#312e81',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: radial-gradient(circle at top center, #1e1b4b 0%, #0f172a 60%, #020617 100%);
+            min-height: 100vh;
+        }
+
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+
+        .transform-style-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .backface-hidden {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .card-shadow {
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), 0 0 30px 0 rgba(99, 102, 241, 0.15);
+        }
+
+        .swiping {
+            transition: none !important;
+            user-select: none;
+        }
+
+        .swipe-animate {
+            transition: transform 0.35s ease-out, opacity 0.35s ease-out !important;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.3);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.6);
+        }
+    </style>
+</head>
+
+<body class="text-slate-100 flex flex-col min-h-screen selection:bg-indigo-500 selection:text-white">
+
+    <!-- Header Navigation -->
+    <header class="w-full glass-panel sticky top-0 z-40 border-b border-slate-800/80 px-4 py-3 shadow-lg">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            
+            <!-- Logo & Brand -->
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-500 flex items-center justify-center shadow-md shadow-indigo-500/20">
+                    <i class="fa-solid fa-graduation-cap text-white text-lg"></i>
+                </div>
+                <div>
+                    <h1 class="text-base font-bold tracking-tight text-white flex items-center gap-2">
+                        Faruk Phrasal kartcıklar
+                        <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 font-medium">YÖKDİL / YDS</span>
+                    </h1>
+                    <p class="text-xs text-slate-400">Sınav Yeterlilik Kelime Kartları</p>
+                    <p class="text-xs text-slate-400">En Çok çıkanlar baz alınmıştır <3 </p>
+                </div>
+            </div>
+
+            <!-- Nav Tabs -->
+            <div class="flex items-center bg-slate-900/80 p-1 rounded-2xl border border-slate-800 text-xs sm:text-sm shadow-inner">
+                <button id="tab-deck" onclick="switchTab('deck')" class="px-3.5 py-1.5 rounded-xl font-medium transition-all flex items-center gap-2 text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 shadow-sm">
+                    <i class="fa-solid fa-clone"></i>
+                    <span>Deste</span>
+                    <span id="badge-deck" class="px-1.5 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 text-[11px] font-bold">0</span>
+                </button>
+
+                <button id="tab-known" onclick="switchTab('known')" class="px-3.5 py-1.5 rounded-lg font-medium transition-all flex items-center gap-2 text-slate-400 hover:text-emerald-400">
+                    <i class="fa-solid fa-circle-check text-emerald-400"></i>
+                    <span>Biliyorum</span>
+                    <span id="badge-known" class="px-1.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">0</span>
+                </button>
+
+                <button id="tab-unknown" onclick="switchTab('unknown')" class="px-3.5 py-1.5 rounded-lg font-medium transition-all flex items-center gap-2 text-slate-400 hover:text-rose-400">
+                    <i class="fa-solid fa-circle-xmark text-rose-400"></i>
+                    <span>Bilmiyorum</span>
+                    <span id="badge-unknown" class="px-1.5 py-0.5 rounded-md bg-rose-500/20 text-rose-300 text-[11px] font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-4xl w-full mx-auto px-4 py-6 flex flex-col items-center justify-center">
+
+        <!-- Progress Bar Bar -->
+        <div class="w-full max-w-md mb-4 px-2">
+            <div class="flex justify-between items-center text-xs text-slate-400 mb-1.5 font-medium">
+                <span>Tamamlanan İlerleme</span>
+                <span id="progress-text">0 / 54 (0%)</span>
+            </div>
+            <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden border border-slate-700/50 p-0.5">
+                <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-emerald-400 rounded-full transition-all duration-300 w-0"></div>
+            </div>
+        </div>
+
+        <!-- 1. DECK VIEW (FLASHCARD & SWIPE AREA) -->
+        <div id="view-deck" class="w-full max-w-md flex flex-col items-center">
+            
+            <!-- Instructions Header -->
+            <div class="w-full flex justify-between items-center text-xs text-slate-400 mb-3 px-2 font-medium">
+                <span class="flex items-center gap-1.5 text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/20">
+                    <i class="fa-solid fa-arrow-left"></i> Sola: Biliyorum
+                </span>
+                <span class="text-slate-500"><i class="fa-solid fa-hand-pointer animate-pulse"></i></span>
+                <span class="flex items-center gap-1.5 text-rose-400 bg-rose-500/10 px-2.5 py-1 rounded-lg border border-rose-500/20">
+                    Sağa: Bilmiyorum <i class="fa-solid fa-arrow-right"></i>
+                </span>
+            </div>
+
+            <!-- Card Stack Container -->
+            <div class="relative w-full h-[420px] perspective-1000 flex justify-center items-center">
+                
+                <!-- Swipe Stamp Badges (Visible on Drag) -->
+                <div id="stamp-known" class="absolute top-6 left-6 z-30 px-4 py-2 rounded-xl border-2 border-emerald-400 text-emerald-400 font-extrabold text-lg tracking-wider transform -rotate-12 opacity-0 pointer-events-none transition-opacity bg-emerald-950/80 backdrop-blur-md shadow-lg">
+                    <i class="fa-solid fa-check mr-1"></i> BİLİYORUM
+                </div>
+                <div id="stamp-unknown" class="absolute top-6 right-6 z-30 px-4 py-2 rounded-xl border-2 border-rose-400 text-rose-400 font-extrabold text-lg tracking-wider transform rotate-12 opacity-0 pointer-events-none transition-opacity bg-rose-950/80 backdrop-blur-md shadow-lg">
+                    <i class="fa-solid fa-xmark mr-1"></i> BİLMİYORUM
+                </div>
+
+                <!-- Dynamic Flip Card -->
+                <div id="active-card" class="card-container relative w-full h-full cursor-grab active:cursor-grabbing rounded-3xl card-shadow transition-transform duration-300" onclick="handleCardClick(event)">
+                    <div id="card-flipper" class="w-full h-full transform-style-3d relative rounded-3xl pointer-events-none">
+                        
+                        <!-- CARD FRONT -->
+                        <div class="absolute inset-0 w-full h-full glass-card rounded-3xl p-6 flex flex-col justify-between backface-hidden pointer-events-auto border border-slate-700/80">
+                            <div class="flex justify-between items-center">
+                                <span id="card-no" class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 font-mono text-xs font-bold">#1 / 54</span>
+                                
+                                <button onclick="speakText(event, 'phrasal')" class="px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-indigo-600/80 text-slate-300 hover:text-white border border-slate-700 transition-all flex items-center gap-1.5 text-xs font-semibold active:scale-95 shadow" title="Telaffuzu Dinle">
+                                    <i class="fa-solid fa-volume-high text-indigo-400"></i>
+                                    <span>Dinle</span>
+                                </button>
+                            </div>
+
+                            <div class="my-auto text-center py-6 px-2">
+                                <span class="text-xs font-semibold tracking-widest uppercase text-indigo-400/90 mb-2 block">Phrasal Verb</span>
+                                <h2 id="card-phrasal" class="text-3xl sm:text-4xl font-black text-white tracking-tight leading-tight">
+                                    make up
+                                </h2>
+                            </div>
+
+                            <div class="w-full pt-4 border-t border-slate-800/80 text-center">
+                                <div class="text-xs text-slate-400 hover:text-indigo-300 transition-colors inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800/60 border border-slate-700/60 shadow-inner">
+                                    <i class="fa-solid fa-rotate text-indigo-400"></i>
+                                    <span>Anlamını Görmek İçin Tıkla</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CARD BACK -->
+                        <div class="absolute inset-0 w-full h-full glass-card rounded-3xl p-6 flex flex-col justify-between backface-hidden rotate-y-180 pointer-events-auto border border-indigo-500/40">
+                            <div class="flex justify-between items-center">
+                                <span id="card-no-back" class="px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 font-mono text-xs font-bold">#1 / 54</span>
+                                <span class="text-xs text-slate-400">
+                                    <i class="fa-solid fa-arrows-rotate text-indigo-400"></i> Arka Yüz
+                                </span>
+                            </div>
+
+                            <div class="my-auto space-y-4 text-center overflow-y-auto max-h-[260px] px-1 py-2">
+                                <div>
+                                    <span class="text-[11px] font-semibold tracking-wider uppercase text-amber-400/80 mb-1 block">Türkçe Anlamı</span>
+                                    <h3 id="card-meaning" class="text-xl font-bold text-amber-300 leading-snug">
+                                        oluşturmak, uydurmak, telafi etmek
+                                    </h3>
+                                </div>
+
+                                <div class="bg-slate-900/90 rounded-2xl p-3.5 border border-slate-800 text-left space-y-2 shadow-inner">
+                                    <div class="flex items-center justify-between">
+                                        <div class="text-[11px] font-bold uppercase tracking-wider text-indigo-400 flex items-center gap-1.5">
+                                            <i class="fa-solid fa-quote-left"></i> Örnek Cümle
+                                        </div>
+                                        <button onclick="speakText(event, 'sentence')" class="text-slate-400 hover:text-indigo-300 text-xs px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 border border-slate-700" title="Cümleyi Dinle">
+                                            <i class="fa-solid fa-volume-low"></i>
+                                        </button>
+                                    </div>
+                                    <p id="card-sentence" class="text-sm text-slate-100 font-medium italic leading-relaxed">
+                                        "They made up an excuse for being late."
+                                    </p>
+                                    <p id="card-sentence-tr" class="text-xs text-slate-400 pt-2 border-t border-slate-800">
+                                        Geç kalmak için bir mazeret uydurdular.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="w-full pt-2 text-center">
+                                <span class="text-[11px] text-slate-500">Ön yüze dönmek için tıkla</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Empty Deck Message Overlay -->
+                <div id="empty-deck-msg" class="hidden absolute inset-0 glass-panel rounded-3xl p-8 flex flex-col items-center justify-center text-center space-y-4 border border-indigo-500/30 z-20">
+                    <div class="w-20 h-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 text-3xl shadow-lg shadow-emerald-500/10">
+                        <i class="fa-solid fa-trophy animate-bounce"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-black text-white">Harika İş Çıkardın!</h3>
+                        <p class="text-xs text-slate-300 mt-1 max-w-xs leading-relaxed">Destenizdeki tüm kelime kartlarını gözden geçirdiniz.</p>
+                    </div>
+                    <button onclick="showResetConfirmModal()" class="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-xs rounded-2xl shadow-xl shadow-indigo-500/25 transition-all active:scale-95 flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Desteyi Sıfırla & Baştan Başla</span>
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Action Controls -->
+            <div id="deck-controls" class="flex items-center justify-center gap-3 mt-6 w-full">
+                <button onclick="handleManualSwipe('left')" class="flex-1 py-3 px-4 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-emerald-950/20">
+                    <i class="fa-solid fa-check text-base"></i>
+                    <span>Biliyorum</span>
+                </button>
+
+                <button onclick="flipCard()" class="p-3.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-indigo-400 rounded-2xl text-sm flex items-center justify-center transition-all active:scale-95 shadow-md hover:border-indigo-500/40" title="Karta Çevir">
+                    <i class="fa-solid fa-rotate text-lg"></i>
+                </button>
+
+                <button onclick="handleManualSwipe('right')" class="flex-1 py-3 px-4 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-400 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg shadow-rose-950/20">
+                    <span>Bilmiyorum</span>
+                    <i class="fa-solid fa-xmark text-base"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- 2. SAVED LIST VIEWS (KNOWN / UNKNOWN) -->
+        <div id="view-list" class="hidden w-full max-w-2xl flex-col space-y-4">
+            
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                    <h2 id="list-title" class="text-xl font-extrabold text-white">Öğrenilen Kelimeler</h2>
+                    <span id="list-count-badge" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">0</span>
+                </div>
+                
+                <button onclick="showResetConfirmModal()" class="text-xs text-rose-400 hover:text-rose-300 px-3 py-1.5 rounded-xl bg-rose-500/10 border border-rose-500/20 transition-all flex items-center gap-1.5 active:scale-95">
+                    <i class="fa-solid fa-trash-can"></i>
+                    <span>Sıfırla</span>
+                </button>
+            </div>
+
+            <!-- List Search Input -->
+            <div class="relative w-full">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+                <input type="text" id="list-search" oninput="filterListView()" placeholder="Liste içinde phrasal verb ara..." class="w-full bg-slate-900/80 border border-slate-800 rounded-xl pl-9 pr-4 py-2 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition-colors">
+            </div>
+
+            <!-- Card Grid Container for List View -->
+            <div id="list-grid" class="grid grid-cols-1 md:grid-cols-2 gap-3 max-h-[58vh] overflow-y-auto pr-1">
+                <!-- Dynamically Rendered Saved Cards -->
+            </div>
+
+            <div id="list-empty-state" class="hidden text-center py-12 glass-panel rounded-2xl border border-slate-800">
+                <i class="fa-regular fa-folder-open text-4xl text-slate-600 mb-2 block"></i>
+                <p class="text-xs text-slate-400 font-medium">Bu kategoride henüz kaydedilmiş kelime yok.</p>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Modal: Confirmation Dialog for Reset -->
+    <div id="reset-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="glass-panel p-6 rounded-3xl border border-slate-700 max-w-sm w-full space-y-4 text-center shadow-2xl">
+            <div class="w-12 h-12 rounded-full bg-rose-500/10 border border-rose-500/30 text-rose-400 flex items-center justify-center mx-auto text-xl">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div>
+                <h3 class="text-lg font-bold text-white">İlerlemeyi Sıfırla?</h3>
+                <p class="text-xs text-slate-400 mt-1">Tüm bildiklerim ve bilmediklerim listesi temizlenecek, tüm kelimeler desteye geri eklenecektir.</p>
+            </div>
+            <div class="flex items-center gap-3 pt-2">
+                <button onclick="closeResetModal()" class="flex-1 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs rounded-xl border border-slate-700 transition-all">
+                    İptal Et
+                </button>
+                <button onclick="confirmResetProgress()" class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs rounded-xl transition-all shadow-lg shadow-rose-600/30">
+                    Evet, Sıfırla
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-4 text-center text-xs text-slate-500 border-t border-slate-800/80 glass-panel mt-auto">
+        <p class="font-medium">Phrasal Verbs Deck • YÖKDİL & YDS Sınav Hazırlık Platformu</p>
+    </footer>
+
+    <script>
+        /* =========================================================================
+           1. DATASET DEFINITION (54 ESSENTIAL PHRASAL VERBS)
+           ========================================================================= */
+        const phrasalData = [
+            { "no": 1, "phrasal_verb": "make up", "meaning": "oluşturmak, uydurmak, telafi etmek, makyaj yapmak", "sentence": "They made up an excuse for being late.", "sentence_tr": "Geç kalmak için bir mazeret uydurdular." },
+            { "no": 2, "phrasal_verb": "put off", "meaning": "ertelemek, tiksindirmek", "sentence": "Never put off until tomorrow what you can do today.", "sentence_tr": "Bugün yapabileceğin işi yarına erteleme." },
+            { "no": 3, "phrasal_verb": "turn down", "meaning": "azaltmak (ses, ısı), reddetmek", "sentence": "She turned down the job offer.", "sentence_tr": "İş teklifini reddetti." },
+            { "no": 4, "phrasal_verb": "take over", "meaning": "devralmak", "sentence": "The new manager will take over next week.", "sentence_tr": "Yeni müdür önümüzdeki hafta görevi devralacak." },
+            { "no": 5, "phrasal_verb": "make out", "meaning": "güçlükle anlamak, fark etmek", "sentence": "I could barely make out what he was saying.", "sentence_tr": "Ne söylediğini güçlükle anlayabildim." },
+            { "no": 6, "phrasal_verb": "find out", "meaning": "keşfetmek, öğrenmek", "sentence": "We need to find out the truth behind the story.", "sentence_tr": "Hikayenin arkasındaki gerçeği öğrenmemiz gerekiyor." },
+            { "no": 7, "phrasal_verb": "bring about", "meaning": "sebep olmak, yol açmak", "sentence": "New technology brings about big changes in society.", "sentence_tr": "Yeni teknoloji toplumda büyük değişikliklere sebep olur." },
+            { "no": 8, "phrasal_verb": "make up for", "meaning": "telafi etmek", "sentence": "Hard work can make up for lack of experience.", "sentence_tr": "Çok çalışmak tecrübe eksikliğini telafi edebilir." },
+            { "no": 9, "phrasal_verb": "put up with", "meaning": "katlanmak, tahammül etmek", "sentence": "I cannot put up with this noise anymore.", "sentence_tr": "Bu gürültüye artık katlanamıyorum." },
+            { "no": 10, "phrasal_verb": "give up", "meaning": "bırakmak, pes etmek", "sentence": "Never give up on your goals.", "sentence_tr": "Hedeflerinden asla vazgeçme." },
+            { "no": 11, "phrasal_verb": "put out", "meaning": "söndürmek (yangın/ışık), yayımlamak", "sentence": "Firefighters put out the fire quickly.", "sentence_tr": "İtfaiyeciler yangını hızla söndürdü." },
+            { "no": 12, "phrasal_verb": "set up", "meaning": "kurmak, düzenlemek, tuzak kurmak", "sentence": "They set up a new research center.", "sentence_tr": "Yeni bir araştırma merkezi kurdular." },
+            { "no": 13, "phrasal_verb": "break down", "meaning": "bozulmak (makine), parçalamak, ruhen yıkılmak", "sentence": "Our car broke down on the highway.", "sentence_tr": "Arabamız otoyolda bozuldu." },
+            { "no": 14, "phrasal_verb": "deal with", "meaning": "başa çıkmak, ele almak", "sentence": "How do you deal with high stress levels?", "sentence_tr": "Yüksek stres seviyeleriyle nasıl başa çıkıyorsun?" },
+            { "no": 15, "phrasal_verb": "carry out", "meaning": "uygulamak, yürütmek", "sentence": "Scientists carry out research every day.", "sentence_tr": "Bilim insanları her gün araştırma yürütür." },
+            { "no": 16, "phrasal_verb": "hold up", "meaning": "geciktirmek, engellemek, soygun yapmak", "sentence": "Traffic held us up for an hour.", "sentence_tr": "Trafik bizi bir saat geciktirdi." },
+            { "no": 17, "phrasal_verb": "set out", "meaning": "yola çıkmak, bir amaca koyulmak", "sentence": "They set out early in the morning.", "sentence_tr": "Sabah erkenden yola çıktılar." },
+            { "no": 18, "phrasal_verb": "take off", "meaning": "kalkış yapmak (uçak), elbiseyi çıkarmak, aniden başarılı olmak", "sentence": "The plane took off right on time.", "sentence_tr": "Uçak tam zamanında kalkış yaptı." },
+            { "no": 19, "phrasal_verb": "bring up", "meaning": "yetiştirmek (çocuk), gündeme getirmek", "sentence": "She brought up three healthy children.", "sentence_tr": "Üç sağlıklı çocuk yetiştirdi." },
+            { "no": 20, "phrasal_verb": "rely on", "meaning": "güvenmek, bel bağlamak", "sentence": "You can always rely on your true friends.", "sentence_tr": "Gerçek arkadaşlarına her zaman güvenebilirsin." },
+            { "no": 21, "phrasal_verb": "come up with", "meaning": "fikir/çözüm üretmek, bulmak", "sentence": "He came up with a brilliant idea.", "sentence_tr": "Harika bir fikir buldu." },
+            { "no": 22, "phrasal_verb": "take up", "meaning": "hobiye/işe başlamak, yer/zaman kaplamak", "sentence": "I decided to take up yoga.", "sentence_tr": "Yogaya başlamaya karar verdim." },
+            { "no": 23, "phrasal_verb": "get off", "meaning": "taşıttan inmek, cezadan kurtulmak", "sentence": "Get off the bus at the next station.", "sentence_tr": "Gelecek durakta otobüsten in." },
+            { "no": 24, "phrasal_verb": "keep up with", "meaning": "ayak uydurmak, hızına yetişmek", "sentence": "It is hard to keep up with fast technology.", "sentence_tr": "Hızlı teknolojiye ayak uydurmak zordur." },
+            { "no": 25, "phrasal_verb": "cope with", "meaning": "üstesinden gelmek, başa çıkmak", "sentence": "She managed to cope with difficult problems.", "sentence_tr": "Zor sorunlarla başa çıkmayı başardı." },
+            { "no": 26, "phrasal_verb": "turn over", "meaning": "teslim etmek, devretmek, ters çevirmek", "sentence": "He turned over the documents to the police.", "sentence_tr": "Belgeleri polise teslim etti." },
+            { "no": 27, "phrasal_verb": "call off", "meaning": "iptal etmek", "sentence": "They had to call off the match due to rain.", "sentence_tr": "Yağmur nedeniyle maçı iptal etmek zorunda kaldılar." },
+            { "no": 28, "phrasal_verb": "put on", "meaning": "kıyafet giymek, kilo almak", "sentence": "Put on your coat, it is cold outside.", "sentence_tr": "Ceketini giy, dışarısı soğuk." },
+            { "no": 29, "phrasal_verb": "work out", "meaning": "antrenman yapmak, çözmek, hesaplamak", "sentence": "Everything will work out fine in the end.", "sentence_tr": "Sonunda her şey yoluna girecek." },
+            { "no": 30, "phrasal_verb": "cut down on", "meaning": "azaltmak (tüketim vs.)", "sentence": "Try to cut down on sugar intake.", "sentence_tr": "Şeker tüketimini azaltmaya çalış." },
+            { "no": 31, "phrasal_verb": "get through", "meaning": "zorluk atlatmak, telefonla ulaşmak", "sentence": "I could not get through to him by phone.", "sentence_tr": "Ona telefonla ulaşamadım." },
+            { "no": 32, "phrasal_verb": "go through", "meaning": "zorlu bir dönem geçirmek, incelemek", "sentence": "They went through a tough period last year.", "sentence_tr": "Geçen yıl zor bir dönem geçirdiler." },
+            { "no": 33, "phrasal_verb": "take on", "meaning": "üstlenmek (sorumluluk), işe almak", "sentence": "The company decided to take on new workers.", "sentence_tr": "Şirket yeni işçiler işe almaya karar verdi." },
+            { "no": 34, "phrasal_verb": "give in", "meaning": "boyun eğmek, teslim olmak", "sentence": "He finally gave in to temptation.", "sentence_tr": "Sonunda arzularına yenik düştü." },
+            { "no": 35, "phrasal_verb": "look into", "meaning": "araştırmak, incelemek", "sentence": "The committee is looking into the issue.", "sentence_tr": "Komite konuyu inceliyor." },
+            { "no": 36, "phrasal_verb": "pull through", "meaning": "hastalığı atlatmak, iyileşmek", "sentence": "With proper care, the patient will pull through.", "sentence_tr": "Uygun bakımla birlikte hasta iyileşecek." },
+            { "no": 37, "phrasal_verb": "turn up", "meaning": "çıkagelmek, sesi/ısıyı artırmak", "sentence": "He turned up unexpectedly at the party.", "sentence_tr": "Partide beklenmedik bir şekilde çıkageldi." },
+            { "no": 38, "phrasal_verb": "look after", "meaning": "bakmak, ilgilenmek", "sentence": "Who looks after your dog while you are away?", "sentence_tr": "Uzakta olduğunda köpeğinle kim ilgileniyor?" },
+            { "no": 39, "phrasal_verb": "take after", "meaning": "akrabaya benzemek (soy olarak)", "sentence": "She takes after her mother in character.", "sentence_tr": "Karakter olarak annesine benziyor." },
+            { "no": 40, "phrasal_verb": "account for", "meaning": "açıklamak, oranını oluşturmak", "sentence": "Imports account for 30% of total sales.", "sentence_tr": "İthalat toplam satışların %30'unu oluşturur." },
+            { "no": 41, "phrasal_verb": "call for", "meaning": "gerektirmek, talep etmek", "sentence": "This great victory calls for a celebration.", "sentence_tr": "Bu büyük zafer bir kutlama gerektirir." },
+            { "no": 42, "phrasal_verb": "break into", "meaning": "zorla içeri girmek (hırsızlık)", "sentence": "A thief broke into the office last night.", "sentence_tr": "Dün gece ofise bir hırsız girdi." },
+            { "no": 43, "phrasal_verb": "keep on", "meaning": "devam etmek", "sentence": "Keep on practicing until you succeed.", "sentence_tr": "Başarana kadar pratik yapmaya devam et." },
+            { "no": 44, "phrasal_verb": "run out of", "meaning": "tükenmek, bitirmek", "sentence": "We ran out of time during the exam.", "sentence_tr": "Sınav sırasında zamanı tükettik." },
+            { "no": 45, "phrasal_verb": "cut off", "meaning": "kesmek (elektrik/bağlantı)", "sentence": "Electricity was cut off due to the storm.", "sentence_tr": "Fırtına nedeniyle elektrik kesildi." },
+            { "no": 46, "phrasal_verb": "leave out", "meaning": "dışarıda bırakmak, dâhil etmemek", "sentence": "Do not leave out any important details.", "sentence_tr": "Önemli hiçbir detayı dışarıda bırakma." },
+            { "no": 47, "phrasal_verb": "bring down", "meaning": "fiyatı/enflasyonu düşürmek, devirmek", "sentence": "The government aims to bring down inflation.", "sentence_tr": "Hükümet enflasyonu düşürmeyi hedefliyor." },
+            { "no": 48, "phrasal_verb": "keep off", "meaning": "uzak durmak, yaklaştırmamak", "sentence": "Please keep off the grass in the park.", "sentence_tr": "Lütfen parktaki çimlerden uzak durun." },
+            { "no": 49, "phrasal_verb": "keep up", "meaning": "sürdürmek, yüksek seviyede tutmak", "sentence": "Keep up the good work!", "sentence_tr": "İyi çalışmayı sürdür!" },
+            { "no": 50, "phrasal_verb": "run over", "meaning": "araçla ezmek, gözden geçirmek", "sentence": "Drive carefully not to run over street animals.", "sentence_tr": "Sokak hayvanlarını ezmemek için dikkatli sür." },
+            { "no": 51, "phrasal_verb": "figure out", "meaning": "anlamak, çözmek (akıl yürüterek)", "sentence": "I finally figured out how to solve the problem.", "sentence_tr": "Sorunu nasıl çözeceğimi sonunda anladım." },
+            { "no": 52, "phrasal_verb": "give off", "meaning": "koku/gaz/ışık yaymak", "sentence": "Fresh flowers give off a wonderful scent.", "sentence_tr": "Taze çiçekler harika bir koku yayar." },
+            { "no": 53, "phrasal_verb": "point out", "meaning": "dikkat çekmek, işaret etmek", "sentence": "The teacher pointed out the mistake on the board.", "sentence_tr": "Öğretmen tahtadaki hataya dikkat çekti." },
+            { "no": 54, "phrasal_verb": "show off", "meaning": "gösteriş yapmak, caka satmak", "sentence": "He likes to show off his new sports car.", "sentence_tr": "Yeni spor arabasıyla gösteriş yapmayı seviyor." },        
+            { "no": 52, "phrasal_verb": "give off", "meaning": "yaymak", "sentence": "Fresh flowers give off a wonderful scent.", "sentence_tr": "Taze çiçekler harika bir koku yayar." },
+            { "no": 53, "phrasal_verb": "point out", "meaning": "bir şeye dikkat çekmek", "sentence": "The teacher pointed out the mistake on the board.", "sentence_tr": "Öğretmen tahtadaki hataya dikkat çekti." },
+            { "no": 54, "phrasal_verb": "show off", "meaning": "gösteriş yapmak", "sentence": "He likes to show off his new sports car.", "sentence_tr": "Yeni spor arabasıyla gösteriş yapmayı seviyor." },
+            { "no": 55, "phrasal_verb": "make do", "meaning": "...ile idare etmek", "sentence": "We must make do with what we have.", "sentence_tr": "Elimizdekilerle idare etmek zorundayız." },
+            { "no": 56, "phrasal_verb": "put down", "meaning": "yere bırakmak, kapamak (telefon), listeye yazmak, küçük düşürmek", "sentence": "He put down his heavy bags on the floor.", "sentence_tr": "Ağır çantalarını yere bıraktı." },
+            { "no": 57, "phrasal_verb": "lead to", "meaning": "yol açmak", "sentence": "Careless driving can lead to severe accidents.", "sentence_tr": "Dikkatsiz sürüş ciddi kazalara yol açabilir." },
+            { "no": 58, "phrasal_verb": "use up", "meaning": "tüketmek", "sentence": "We have used up all the paper in the office.", "sentence_tr": "Ofisteki tüm kağıdı tükettik." },
+            { "no": 59, "phrasal_verb": "come across", "meaning": "rast gelmek", "sentence": "I came across an old photograph today.", "sentence_tr": "Bugün eski bir fotoğrafa rastladım." },
+            { "no": 60, "phrasal_verb": "look up", "meaning": "bakmak (bilgi kaynağına)", "sentence": "You should look up unfamiliar words in a dictionary.", "sentence_tr": "Bilmeyen sözcükleri sözlükten bakmalısın." },
+            { "no": 61, "phrasal_verb": "run out", "meaning": "tükenmek", "sentence": "Time is running out quickly for the test.", "sentence_tr": "Test için zaman hızla tükeniyor." },
+            { "no": 62, "phrasal_verb": "fall behind", "meaning": "geri kalmak", "sentence": "Work hard so you do not fall behind in class.", "sentence_tr": "Sınıfta geri kalmamak için çok çalış." },
+            { "no": 63, "phrasal_verb": "get along", "meaning": "iyi geçinmek, ilerlemek", "sentence": "They get along very well with each other.", "sentence_tr": "Birbirleriyle çok iyi geçinirler." },
+            { "no": 64, "phrasal_verb": "get away with", "meaning": "yanına kâr kalmak", "sentence": "He cannot get away with breaking the rules.", "sentence_tr": "Kuralları ihlal etmek yanına kâr kalamaz." },
+            { "no": 65, "phrasal_verb": "keep away", "meaning": "uzak durmak", "sentence": "Please keep away from dangerous zones.", "sentence_tr": "Lütfen tehlikeli bölgelerden uzak durun." },
+            { "no": 66, "phrasal_verb": "put aside", "meaning": "bir kenara koymak", "sentence": "She puts aside money every month for emergency.", "sentence_tr": "Acil durum için her ay bir kenara para koyar." },
+            { "no": 67, "phrasal_verb": "put through", "meaning": "telefona bağlamak, uğratmak", "sentence": "Hold the line, I will put you through to the manager.", "sentence_tr": "Hatta kalın, sizi müdüre bağlayacağım." },
+            { "no": 68, "phrasal_verb": "run through", "meaning": "gözden geçirmek", "sentence": "Let us run through the presentation once more.", "sentence_tr": "Sunumu bir kez daha gözden geçirelim." },
+            { "no": 69, "phrasal_verb": "show up", "meaning": "gelmek", "sentence": "He did not show up for the morning meeting.", "sentence_tr": "Sabah toplantısına gelmedi." },
+            { "no": 70, "phrasal_verb": "take down", "meaning": "not almak", "sentence": "Please take down these important guidelines.", "sentence_tr": "Lütfen bu önemli talimatları not alın." },
+            { "no": 71, "phrasal_verb": "turn off", "meaning": "kapatmak (elektrikli aleti)", "sentence": "Turn off the lights before leaving the room.", "sentence_tr": "Odadan çıkmadan önce ışıkları kapatın." },
+            { "no": 72, "phrasal_verb": "turn on", "meaning": "açmak (elektrikli aleti), aniden saldırmak", "sentence": "Turn on the heater, it is very cold inside.", "sentence_tr": "Isıtıcıyı aç, içerisi çok soğuk." },
+            { "no": 73, "phrasal_verb": "depend on", "meaning": "bağlı olmak, güvenmek", "sentence": "Our victory depends on teamwork and dedication.", "sentence_tr": "Zaferimiz takım çalışmasına ve adanmışlığa bağlıdır." },
+            { "no": 74, "phrasal_verb": "end up", "meaning": "sonuçlanmak", "sentence": "We ended up taking the wrong road in the dark.", "sentence_tr": "Karanlıkta yanlış yola girerek sonuçlandık." },
+            { "no": 75, "phrasal_verb": "break out", "meaning": "patlak vermek, firar etmek", "sentence": "A unexpected fire broke out in the factory.", "sentence_tr": "Fabrikada beklenmedik bir yangın patlak verdi." },
+            { "no": 76, "phrasal_verb": "turn out", "meaning": "... olduğu ortaya çıkmak, toplanmak", "sentence": "The news story turned out to be false.", "sentence_tr": "Haberin yanlış olduğu ortaya çıktı." },
+            { "no": 77, "phrasal_verb": "look for", "meaning": "aramak", "sentence": "I am looking for my lost keys right now.", "sentence_tr": "Şu anda kayıp anahtarlarımı arıyorum." },
+            { "no": 78, "phrasal_verb": "break up", "meaning": "parçalara ayırmak, ayrılmak (ilişki), sona ermek", "sentence": "They decided to break up after three years.", "sentence_tr": "Üç yılın ardından ayrılmaya karar verdiler." },
+            { "no": 79, "phrasal_verb": "set off", "meaning": "yola çıkmak, devreye girmek", "sentence": "We set off early in the morning for journey.", "sentence_tr": "Yolculuk için sabah erkenden yola çıktık." },
+            { "no": 80, "phrasal_verb": "hand over", "meaning": "teslim etmek", "sentence": "Hand over your documents to the customs officer.", "sentence_tr": "Belgelerinizi gümrük memuruna teslim edin." },
+            { "no": 81, "phrasal_verb": "look down on", "meaning": "küçük görmek", "sentence": "Never look down on anyone because of their status.", "sentence_tr": "Statüleri nedeniyle kimseyi asla küçük görme." },
+            { "no": 82, "phrasal_verb": "look up to", "meaning": "hayranlık duymak", "sentence": "Young athletes look up to world champions.", "sentence_tr": "Genç sporcular dünya şampiyonlarına hayranlık duyar." },
+            { "no": 83, "phrasal_verb": "make for", "meaning": "...ya doğru yürümek, sağlamak", "sentence": "When rain started, they made for the nearest shelter.", "sentence_tr": "Yağmur başlayınca en yakın sığınağa doğru yürüdüler." },
+            { "no": 84, "phrasal_verb": "put up", "meaning": "inşa etmek, kaldırmak, ortaya koymak (mücadele vs), fiyatını artırmak", "sentence": "They put up a fence around the garden.", "sentence_tr": "Bahçenin etrafına bir çit inşa ettiler." },
+            { "no": 85, "phrasal_verb": "take away", "meaning": "alıp götürmek, çıkarmak (sayı)", "sentence": "Take away these old books from the desk.", "sentence_tr": "Bu eski kitapları masadan alıp götür." },
+            { "no": 86, "phrasal_verb": "back up", "meaning": "desteklemek, yedeklemek, kanıtlamak, geriye doğru sürmek", "sentence": "Always back up your important computer files.", "sentence_tr": "Önemli bilgisayar dosyalarınızı her zaman yedekleyin." },
+            { "no": 87, "phrasal_verb": "get rid of", "meaning": "kurtulmak", "sentence": "I want to get rid of unnecessary trash.", "sentence_tr": "Gereksiz çöplerden kurtulmak istiyorum." },
+            { "no": 88, "phrasal_verb": "wipe out", "meaning": "yok etmek", "sentence": "The violent hurricane wiped out the whole village.", "sentence_tr": "Şiddetli kasırga bütün köyü yok etti." },
+            { "no": 89, "phrasal_verb": "stem from", "meaning": "...dan kaynaklanmak", "sentence": "Most errors stem from poor communication.", "sentence_tr": "Hataların çoğu zayıf iletişimden kaynaklanır." },
+            { "no": 90, "phrasal_verb": "take care of", "meaning": "ilgilenmek", "sentence": "She takes care of her street animals lovingly.", "sentence_tr": "Sokak hayvanlarıyla sevgiyle ilgilenir." },
+            { "no": 91, "phrasal_verb": "pull out", "meaning": "çekip çıkarmak, çekmek (asker)", "sentence": "The military decided to pull out troops safely.", "sentence_tr": "Ordu, birlikleri güvenli şekilde çekmeye karar verdi." },
+            { "no": 92, "phrasal_verb": "send out", "meaning": "yaymak, göndermek", "sentence": "Sun sends out light and energy across solar system.", "sentence_tr": "Güneş, güneş sistemi boyunca ışık ve enerji yayar." },
+            { "no": 93, "phrasal_verb": "settle down", "meaning": "yerleşmek, alışmak, sakinleşmek", "sentence": "They want to settle down in a quiet seaside town.", "sentence_tr": "Sakin bir deniz kasabasına yerleşmek istiyorlar." },
+            { "no": 94, "phrasal_verb": "turn into", "meaning": "dönüşmek", "sentence": "Caterpillars eventually turn into beautiful butterflies.", "sentence_tr": "Tırtıllar sonunda güzel kelebeklere dönüşür." },
+            { "no": 95, "phrasal_verb": "break through", "meaning": "(engel) aşmak", "sentence": "Scientists broke through major research barriers.", "sentence_tr": "Bilim insanları büyük araştırma engellerini aştı." },
+            { "no": 96, "phrasal_verb": "bring in", "meaning": "tanıtmak, para kazanmak, işe almak", "sentence": "The tech firm brought in top developers.", "sentence_tr": "Teknoloji firması en iyi geliştiricileri işe aldı." },
+            { "no": 97, "phrasal_verb": "do away with", "meaning": "yürürlükten kaldırmak, öldürmek", "sentence": "The government did away with outdated tax rules.", "sentence_tr": "Hükümet demode vergi kurallarını yürürlükten kaldırdı." },
+            { "no": 98, "phrasal_verb": "fill out", "meaning": "doldurmak", "sentence": "Please fill out this registration form completely.", "sentence_tr": "Lütfen bu kayıt formunu eksiksiz doldurun." },
+            { "no": 99, "phrasal_verb": "get away", "meaning": "kaçmak", "sentence": "The thief managed to get away in a red car.", "sentence_tr": "Hırsız kırmızı bir arabayla kaçmayı başardı." },
+            { "no": 100, "phrasal_verb": "make over", "meaning": "dönüştürmek", "sentence": "She made over her old room into a studio.", "sentence_tr": "Eski odasını bir stüdyoya dönüştürdü." },
+            { "no": 101, "phrasal_verb": "pull up", "meaning": "durmak, azarlamak", "sentence": "A black luxury car pulled up in front of house.", "sentence_tr": "Evin önünde siyah lüks bir araba durdu." },
+            { "no": 102, "phrasal_verb": "put away", "meaning": "yerine koymak, bir yere kapatmak", "sentence": "Put away your toys after finishing the game.", "sentence_tr": "Oyunu bitirdikten sonra oyuncaklarını yerine koy." },
+            { "no": 103, "phrasal_verb": "sort out", "meaning": "halletmek, tasnif etmek", "sentence": "We need to sort out these complex issues.", "sentence_tr": "Bu karmaşık sorunları halletmemiz gerekiyor." },
+            { "no": 104, "phrasal_verb": "take out", "meaning": "çıkarımak", "sentence": "He took out his wallet to pay for dinner.", "sentence_tr": "Akşam yemeğini ödemek için cüzdanını çıkardı." },
+            { "no": 105, "phrasal_verb": "turn back", "meaning": "geri dönmek", "sentence": "It was far too late to turn back now.", "sentence_tr": "Şimdi geri dönmek için çok geçti." },
+        { "no": 106, "phrasal_verb": "result in", "meaning": "... ile sonuçlanmak", "sentence": "Poor planning can result in severe failure.", "sentence_tr": "Kötü planlama ciddi başarısızlıkla sonuçlanabilir." },
+            { "no": 107, "phrasal_verb": "build up", "meaning": "birikmek", "sentence": "Tension began to build up over time.", "sentence_tr": "Zamanla gerilim birikmeye başladı." },
+            { "no": 108, "phrasal_verb": "come up", "meaning": "ele alınmak, çıkmak (fırsat, sorun), doğmak (güneş, ay)", "sentence": "An urgent issue came up during the meeting.", "sentence_tr": "Toplantı sırasında acil bir konu ele alındı." },
+            { "no": 109, "phrasal_verb": "hand down", "meaning": "aktarmak", "sentence": "Traditions are handed down through generations.", "sentence_tr": "Gelenekler nesiller boyunca aktarılır." },
+            { "no": 110, "phrasal_verb": "try out", "meaning": "sınamak", "sentence": "They want to try out the new software.", "sentence_tr": "Yeni yazılımı sınamak istiyorlar." },
+            { "no": 111, "phrasal_verb": "carry on", "meaning": "devam etmek", "sentence": "We must carry on despite the challenges.", "sentence_tr": "Zorluklara rağmen devam etmeliyiz." },
+            { "no": 112, "phrasal_verb": "get over", "meaning": "atlatmak", "sentence": "It took months to get over the illness.", "sentence_tr": "Hastalığı atlatmak aylar sürdü." },
+            { "no": 113, "phrasal_verb": "look through", "meaning": "göz atmak", "sentence": "She looked through the report before presenting.", "sentence_tr": "Sunum yapmadan önce rapora göz attı." },
+            { "no": 114, "phrasal_verb": "put forward", "meaning": "ileri sürmek, ileri almak (saati)", "sentence": "He put forward an innovative theory.", "sentence_tr": "Yenilikçi bir teori ileri sürdü." },
+            { "no": 115, "phrasal_verb": "take in", "meaning": "anlamak, kandırmak", "sentence": "Don't be taken in by false promises.", "sentence_tr": "Sahte vaatlerle kanmayın." },
+            { "no": 116, "phrasal_verb": "watch out", "meaning": "dikkat etmek", "sentence": "Watch out for icy spots on the road.", "sentence_tr": "Yoldaki buzlu yerlere dikkat edin." },
+            { "no": 117, "phrasal_verb": "fall through", "meaning": "suya düşmek (plan vs)", "sentence": "Our vacation plans fell through last week.", "sentence_tr": "Tatil planlarımız geçen hafta suya düştü." },
+            { "no": 118, "phrasal_verb": "hold out", "meaning": "direnmek, yetmek", "sentence": "The defenders held out against the enemy.", "sentence_tr": "Savunmacılar düşmana karşı direndi." },
+            { "no": 119, "phrasal_verb": "keep out", "meaning": "dışarda tutmak", "sentence": "Signboards warn visitors to keep out.", "sentence_tr": "Tabelalar ziyaretçileri dışarıda durmaları konusunda uyarır." },
+            { "no": 120, "phrasal_verb": "play down", "meaning": "hafife almak", "sentence": "The official tried to play down the risk.", "sentence_tr": "Yetkili riski hafife almaya çalıştı." },
+            { "no": 121, "phrasal_verb": "pull down", "meaning": "yıkmak", "sentence": "They decided to pull down the old warehouse.", "sentence_tr": "Eski depoyu yıkmaya karar verdiler." },
+            { "no": 122, "phrasal_verb": "put in", "meaning": "koymak, harcamak (zaman)", "sentence": "He put in hours of work every day.", "sentence_tr": "Her gün saatlerce emek harcadı." },
+            { "no": 123, "phrasal_verb": "rule out", "meaning": "ihtimalini ortadan kaldırmak", "sentence": "The doctor ruled out any severe illness.", "sentence_tr": "Doktor ciddi bir hastalık ihtimalini ortadan kaldırdı." },
+            { "no": 124, "phrasal_verb": "run away", "meaning": "kaçmak", "sentence": "The cat ran away when the dog barked.", "sentence_tr": "Köpek havlayınca kedi kaçtı." },
+            { "no": 125, "phrasal_verb": "slow down", "meaning": "yavaşlamak", "sentence": "Drivers must slow down in school zones.", "sentence_tr": "Sürücüler okul bölgelerinde yavaşlamalıdır." },
+            { "no": 126, "phrasal_verb": "wait for", "meaning": "beklemek", "sentence": "We are waiting for the test results.", "sentence_tr": "Test sonuçlarını bekliyoruz." },
+            { "no": 127, "phrasal_verb": "end up with", "meaning": "... ile sonuçlanmak", "sentence": "They ended up with a great solution.", "sentence_tr": "Harika bir çözümle sonuçlandılar." },
+            { "no": 128, "phrasal_verb": "derive from", "meaning": "...dan türemek", "sentence": "Many English words derive from Latin.", "sentence_tr": "Pek çok İngilizce kelime Latince'den türemiştir." },
+            { "no": 129, "phrasal_verb": "divide into", "meaning": "...ya bölmek", "sentence": "The class was divided into four groups.", "sentence_tr": "Sınıf dört gruba bölündü." },
+            { "no": 130, "phrasal_verb": "draw on", "meaning": "yararlanmak", "sentence": "The team drew on past experiences.", "sentence_tr": "Ekip geçmiş deneyimlerden yararlandı." },
+            { "no": 131, "phrasal_verb": "draw up", "meaning": "düzenlemek", "sentence": "Lawyers drew up a formal agreement.", "sentence_tr": "Avukatlar resmi bir sözleşme düzenledi." },
+            { "no": 132, "phrasal_verb": "give rise to", "meaning": "sebep olmak", "sentence": "Air pollution gives rise to health problems.", "sentence_tr": "Hava kirliliği sağlık sorunlarına sebep olur." },
+            { "no": 133, "phrasal_verb": "rest on", "meaning": "...ya bağlı olmak", "sentence": "The final decision rests on solid facts.", "sentence_tr": "Nihai karar sağlam gerçeklere bağlıdır." },
+            { "no": 134, "phrasal_verb": "take place", "meaning": "meydana gelmek", "sentence": "The conference will take place in May.", "sentence_tr": "Konferans Mayıs ayında meydana gelecek." },
+            { "no": 135, "phrasal_verb": "break away", "meaning": "kaçmak, ayrılmak", "sentence": "The small group broke away from the main party.", "sentence_tr": "Küçük grup ana partiden ayrıldı." },
+            { "no": 136, "phrasal_verb": "care for", "meaning": "bakımını üstlenmek", "sentence": "She cared for her ailing grandmother lovingly.", "sentence_tr": "Hasta anneannesinin bakımını sevgiyle üstlendi." },
+            { "no": 137, "phrasal_verb": "fill in", "meaning": "doldurmak, yerini doldurmak", "sentence": "Please fill in your name on the form.", "sentence_tr": "Lütfen formdaki isminizi doldurun." },
+            { "no": 138, "phrasal_verb": "get up", "meaning": "kalkmak (yataktan), ayağa kalkmak", "sentence": "He gets up early every morning.", "sentence_tr": "Her sabah erkenden kalkar." },
+            { "no": 139, "phrasal_verb": "go on", "meaning": "devam etmek", "sentence": "The show must go on as planned.", "sentence_tr": "Gösteri planlandığı gibi devam etmeli." },
+            { "no": 140, "phrasal_verb": "look forward to", "meaning": "dört gözle beklemek", "sentence": "We look forward to meeting you soon.", "sentence_tr": "Yakında sizinle buluşmayı dört gözle bekliyoruz." },
+            { "no": 141, "phrasal_verb": "refer to", "meaning": "söz etmek, ifade etmek, göz atmak", "sentence": "The speaker referred to recent academic studies.", "sentence_tr": "Konuşmacı son akademik çalışmalardan söz etti." },
+            { "no": 142, "phrasal_verb": "relate to", "meaning": "... ile ilgili olmak", "sentence": "These figures relate to last year's sales.", "sentence_tr": "Bu rakamlar geçen yılın satışları ile ilgilidir." },
+            { "no": 143, "phrasal_verb": "run into", "meaning": "rastlamak, çarpmak (arabayla), ...yı bulmak (fiyat)", "sentence": "I ran into an old classmate yesterday.", "sentence_tr": "Dün eski bir sınıf arkadaşıma rastladım." },
+            { "no": 144, "phrasal_verb": "send for", "meaning": "çağırmak", "sentence": "They sent for a doctor immediately.", "sentence_tr": "Hemen bir doktor çağırdılar." },
+            { "no": 145, "phrasal_verb": "stand for", "meaning": "...nın kısa hali olmak, temsil etmek, desteklemek", "sentence": "What does this acronym stand for?", "sentence_tr": "Bu kısaltma neyin kısa halidir?" },
+            { "no": 146, "phrasal_verb": "step down", "meaning": "görevi bırakmak", "sentence": "The CEO decided to step down next month.", "sentence_tr": "CEO gelecek ay görevi bırakmaya karar verdi." },
+            { "no": 147, "phrasal_verb": "throw away", "meaning": "atmak, heba etmek", "sentence": "Do not throw away useful study materials.", "sentence_tr": "Yararlı çalışma malzemelerini atmayın." },
+            { "no": 148, "phrasal_verb": "try on", "meaning": "denemek (kıyafet)", "sentence": "She tried on three different jackets.", "sentence_tr": "Üç farklı ceket denedi." },
+            { "no": 149, "phrasal_verb": "break in", "meaning": "hırsızlık amacıyla girmek, sözünü kesmek", "sentence": "Thieves broke in while we were away.", "sentence_tr": "Biz uzaktayken hırsızlar içeri girdi." },
+            { "no": 150, "phrasal_verb": "bring back", "meaning": "bir şeyi alıp gelmek, hatırına gelmek", "sentence": "Old songs bring back fond memories.", "sentence_tr": "Eski şarkılar güzel anıları hatıra getirir." },
+            { "no": 151, "phrasal_verb": "bring off", "meaning": "başarmak", "sentence": "Against all odds, they brought off the victory.", "sentence_tr": "Bütün imkansızlıklara rağmen zaferi başardılar." },
+            { "no": 152, "phrasal_verb": "catch up", "meaning": "hızına yetişmek, muhabbet etmek", "sentence": "She ran fast to catch up with the group.", "sentence_tr": "Grubun hızına yetişmek için hızlı koştu." },
+            { "no": 153, "phrasal_verb": "clear out", "meaning": "boşaltmak, atmak", "sentence": "We cleared out the old garage today.", "sentence_tr": "Bugün eski garajı boşalttık." },
+            { "no": 154, "phrasal_verb": "fall apart", "meaning": "parçalanmak, altüst olmak", "sentence": "The old antique book started to fall apart.", "sentence_tr": "Eski antika kitap parçalanmaya başladı." },
+            { "no": 155, "phrasal_verb": "follow up", "meaning": "takip etmek", "sentence": "Doctors will follow up on his medical condition.", "sentence_tr": "Doktorlar onun tıbbi durumunu takip edecek." },
+            { "no": 156, "phrasal_verb": "get on", "meaning": "binmek (taşıta), iyi geçinmek", "sentence": "They got on the bus quickly in rain.", "sentence_tr": "Yağmurda otobüse hızlıca bindiler." },
+            { "no": 157, "phrasal_verb": "give away", "meaning": "bağışlamak, açığa vurmak", "sentence": "He gave away all his extra books.", "sentence_tr": "Fazla kitaplarının hepsini bağışladı." },
+            { "no": 158, "phrasal_verb": "give back", "meaning": "geri vermek", "sentence": "Please give back my dictionary tomorrow.", "sentence_tr": "Lütfen sözlüğümü yarın geri ver." },
+            { "no": 159, "phrasal_verb": "go along with", "meaning": "kabul etmek", "sentence": "I agree and go along with your decision.", "sentence_tr": "Katılıyorum ve kararınızı kabul ediyorum." },
+            { "no": 160, "phrasal_verb": "hand in", "meaning": "teslim etmek", "sentence": "Students must hand in their assignments before Friday.", "sentence_tr": "Öğrenciler ödevlerini Cuma gününden önce teslim etmelidir." },
+            { "no": 161, "phrasal_verb": "hold on", "meaning": "beklemek, sıkıca tutmak", "sentence": "Please hold on a moment while I transfer your call.", "sentence_tr": "Aramanızı aktarırken lütfen bir an bekleyin." },
+            { "no": 162, "phrasal_verb": "look out for", "meaning": "...ya dikkat etmek", "sentence": "Drivers should look out for pedestrians crossing the road.", "sentence_tr": "Sürücüler yoldan geçen yayalara dikkat etmelidir." },
+            { "no": 163, "phrasal_verb": "look over", "meaning": "göz gezdirmek", "sentence": "The lawyer will look over the contract before we sign it.", "sentence_tr": "Avukat imzalamadan önce sözleşmeye göz gezdirecek." },
+            { "no": 164, "phrasal_verb": "pick up", "meaning": "almak, öğrenmek", "sentence": "She picked up Spanish quickly while living in Madrid.", "sentence_tr": "Madrid'de yaşarken İspanyolca'yı hızla öğrendi." },
+            { "no": 165, "phrasal_verb": "put back", "meaning": "eski yerine koymak", "sentence": "Please put back the books on the shelf after reading.", "sentence_tr": "Okuduktan sonra lütfen kitapları raftaki yerine geri koyun." },
+            { "no": 166, "phrasal_verb": "put over", "meaning": "ifade etmek", "sentence": "He managed to put over his main ideas clearly to the audience.", "sentence_tr": "Ana fikirlerini dinleyicilere net bir şekilde ifade etmeyi başardı." },
+            { "no": 167, "phrasal_verb": "run down", "meaning": "yermek, çarpmak, bulmak, azaltmak", "sentence": "You shouldn't run down your colleagues in front of the boss.", "sentence_tr": "Patronun önünde meslektaşlarınızı yermemelisiniz." },
+            { "no": 168, "phrasal_verb": "set back", "meaning": "geciktirmek", "sentence": "Bad weather set back the construction project by two weeks.", "sentence_tr": "Kötü hava koşulları inşaat projesini iki hafta geciktirdi." },
+            { "no": 169, "phrasal_verb": "stand by", "meaning": "hazırda beklemek, seyirci kalmak, desteklemek", "sentence": "True friends always stand by you during tough times.", "sentence_tr": "Gerçek dostlar zor zamanlarda her zaman sizi destekler." },
+            { "no": 170, "phrasal_verb": "switch off", "meaning": "kapatmak (elektrikli aleti), ilgisini yitirmek", "sentence": "Make sure to switch off all electrical appliances before leaving.", "sentence_tr": "Ayrılmadan önce tüm elektrikli aletleri kapattığınızdan emin olun." },
+            { "no": 171, "phrasal_verb": "take back", "meaning": "sözünü geri almak, hatırlatmak", "sentence": "I apologize for what I said and take back my words.", "sentence_tr": "Söylediklerim için özür dilerim ve sözlerimi geri alıyorum." },
+            { "no": 172, "phrasal_verb": "take up with", "meaning": "arkadaş olmak, ... ile uğraşmak", "sentence": "She decided to take up the issue with customer service.", "sentence_tr": "Konuyu müşteri hizmetleri ile ele almaya karar verdi." },
+            { "no": 173, "phrasal_verb": "think over", "meaning": "iyice düşünmek", "sentence": "I need some time to think over your offer carefully.", "sentence_tr": "Teklifinizi dikkatlice iyice düşünmek için biraz zamana ihtiyacım var." },
+            { "no": 174, "phrasal_verb": "wake up", "meaning": "uyanmak", "sentence": "He usually wakes up early to study for his YDS exam.", "sentence_tr": "YDS sınavına çalışmak için genellikle erken uyanır." },
+            { "no": 175, "phrasal_verb": "be made up of", "meaning": "...dan oluşmak", "sentence": "The committee is made up of five leading scientists.", "sentence_tr": "Komite beş önde gelen bilim insanından oluşmaktadır." },
+            { "no": 176, "phrasal_verb": "engage in", "meaning": "katılmak", "sentence": "Countries should engage in peaceful negotiations to solve conflicts.", "sentence_tr": "Ülkeler çatışmaları çözmek için barışçıl müzakerelere katılmalıdır." },
+            { "no": 177, "phrasal_verb": "get around", "meaning": "seyahat etmek, yayılmak, üstesinden gelmek, ikna etmek", "sentence": "News gets around quickly in a small town.", "sentence_tr": "Haberler küçük bir kasabada hızla yayılır." },
+            { "no": 178, "phrasal_verb": "come down with", "meaning": "...dan hasta olmak", "sentence": "Many employees came down with the flu last week.", "sentence_tr": "Geçen hafta birçok çalışan grip yüzünden hasta oldu." },
+            { "no": 179, "phrasal_verb": "come into", "meaning": "mirasa konmak", "sentence": "He came into a large fortune after his grandfather passed away.", "sentence_tr": "Dedesinin vefatından sonra büyük bir mirasa kondu." },
+            { "no": 180, "phrasal_verb": "cut back", "meaning": "azaltmak", "sentence": "Companies are trying to cut back on unnecessary expenses.", "sentence_tr": "Şirketler gereksiz masrafları azaltmaya çalışıyor." },
+            { "no": 181, "phrasal_verb": "do well", "meaning": "iyi gitmek", "sentence": "The new business venture is doing well in the market.", "sentence_tr": "Yeni iş girişimi piyasada iyi gidiyor." },
+            { "no": 182, "phrasal_verb": "do with", "meaning": "...ile alakalı olmak", "sentence": "This problem has nothing to do with our current plan.", "sentence_tr": "Bu sorunun mevcut planımızla hiçbir alakası yok." },
+            { "no": 183, "phrasal_verb": "do without", "meaning": "...sız idare etmek", "sentence": "We cannot do without clean water and a healthy environment.", "sentence_tr": "Temiz su ve sağlıklı çevre olmadan idare edemeyiz." },
+            { "no": 184, "phrasal_verb": "fall into", "meaning": "bölünmek", "sentence": "The study falls into three distinct research phases.", "sentence_tr": "Çalışma üç belirgin araştırma evresine bölünür." },
+            { "no": 185, "phrasal_verb": "fight off", "meaning": "...ya karşı savaşmak", "sentence": "The immune system helps fight off harmful infections.", "sentence_tr": "Bağışıklık sistemi zararlı enfeksiyonlara karşı savaşmaya yardımcı olur." },
+            { "no": 186, "phrasal_verb": "keep down", "meaning": "kontrol altında tutmak", "sentence": "Governments try to keep down inflation rates.", "sentence_tr": "Hükümetler enflasyon oranlarını kontrol altında tutmaya çalışır." },
+            { "no": 187, "phrasal_verb": "pass out", "meaning": "bayılmak", "sentence": "He passed out from extreme heat and dehydration.", "sentence_tr": "Aşırı sıcak ve susuzluktan bayıldı." },
+            { "no": 188, "phrasal_verb": "search for", "meaning": "aramak", "sentence": "Researchers continue to search for alternative energy sources.", "sentence_tr": "Araştırmacılar alternatif enerji kaynakları aramaya devam ediyor." },
+            { "no": 189, "phrasal_verb": "send off", "meaning": "postalamak, yaymak", "sentence": "She sent off the application forms yesterday morning.", "sentence_tr": "Başvuru formlarını dün sabah postaladı." },
+            { "no": 190, "phrasal_verb": "substitute for", "meaning": "yerini almak", "sentence": "Nothing can substitute for hard work and dedication.", "sentence_tr": "Hiçbir şey sıkı çalışma ve adanmışlığın yerini alamaz." },
+            { "no": 191, "phrasal_verb": "take into account", "meaning": "hesaba katmak", "sentence": "We must take into account all economic factors before investing.", "sentence_tr": "Yatırım yapmadan önce tüm ekonomik faktörleri hesaba katmalıyız." },
+            { "no": 192, "phrasal_verb": "take part in", "meaning": "katılmak", "sentence": "Thousands of athletes took part in the international marathon.", "sentence_tr": "Uluslararası maratona binlerce sporcu katıldı." },
+            { "no": 193, "phrasal_verb": "blow up", "meaning": "havaya uçurmak, şişirmek, kopmak (fırtına)", "sentence": "The bomb blew up a deserted building near the border.", "sentence_tr": "Bomba, sınır yakınlarındaki terk edilmiş bir binayı havaya uçurdu." },
+            { "no": 194, "phrasal_verb": "break off", "meaning": "bitirmek (ilişki vb), koparmak", "sentence": "The two countries decided to break off diplomatic relations.", "sentence_tr": "İki ülke diplomatik ilişkileri bitirmeye karar verdi." },
+            { "no": 195, "phrasal_verb": "bring out", "meaning": "piyasaya sürmek, öne çıkarmak", "sentence": "The tech company will bring out a new smartphone model soon.", "sentence_tr": "Teknoloji şirketi yakında yeni bir akıllı telefon modelini piyasaya sürecek." },
+            { "no": 196, "phrasal_verb": "call back", "meaning": "daha sonra aramak (telefon), geri gelmek", "sentence": "I am in a meeting right now, I will call you back later.", "sentence_tr": "Şu an toplantıdayım, seni daha sonra arayacağım." },
+            { "no": 197, "phrasal_verb": "carry away", "meaning": "heyecanlanmak", "sentence": "Don't get carried away by initial success, stay focused.", "sentence_tr": "İlk başarıyla heyecanlanmayın, odaklanmaya devam edin." },
+            { "no": 198, "phrasal_verb": "change over", "meaning": "...ya geçmek", "sentence": "The factory will change over to solar energy next year.", "sentence_tr": "Fabrika gelecek yıl güneş enerjisine geçecek." },
+            { "no": 199, "phrasal_verb": "close down", "meaning": "kepenk indirmek", "sentence": "Many small shops closed down during the economic crisis.", "sentence_tr": "Ekonomik kriz sırasında birçok küçük dükkan kepenk indirdi." },
+            { "no": 200, "phrasal_verb": "come along", "meaning": "birlikte gitmek, varmak, var olmaya başlamak", "sentence": "A great opportunity came along when least expected.", "sentence_tr": "En az beklenildiği anda harika bir fırsat ortaya çıktı." },
+            { "no": 201, "phrasal_verb": "come back", "meaning": "geri dönmek, tekrar moda olmak", "sentence": "Vintage clothing styles are starting to come back into fashion.", "sentence_tr": "Vintage giyim tarzları tekrar moda olmaya başlıyor." },
+            { "no": 202, "phrasal_verb": "come down", "meaning": "yere düşmek, azalmak, desteklemek", "sentence": "Inflation rates are expected to come down slowly.", "sentence_tr": "Enflasyon oranlarının yavaşça azalması bekleniyor." },
+            { "no": 203, "phrasal_verb": "come in", "meaning": "içeri girmek, gelmek (bilgi, haber), yükselmek (gelgit)", "sentence": "Important news came in regarding the international summit.", "sentence_tr": "Uluslararası zirve ile ilgili önemli bir haber geldi." },
+            { "no": 204, "phrasal_verb": "come out", "meaning": "piyasaya çıkmak, ortaya çıkmak, dışarı çıkmak", "sentence": "His new academic book will come out next month.", "sentence_tr": "Onun yeni akademik kitabı gelecek ay piyasaya çıkacak." },
+            { "no": 205, "phrasal_verb": "come through", "meaning": "üstesinden gelmek", "sentence": "Despite facing many difficulties, she came through successfully.", "sentence_tr": "Pek çok zorlukla karşılaşmasına rağmen başarıyla üstesinden geldi." },
+            { "no": 206, "phrasal_verb": "count on", "meaning": "güvenmek", "sentence": "You can always count on your team members for support.", "sentence_tr": "Destek için takım üyelerinize her zaman güvenebilirsiniz." },
+            { "no": 207, "phrasal_verb": "cut down", "meaning": "azaltmak, kesmek (ağaç)", "sentence": "He is trying to cut down on his daily sugar intake.", "sentence_tr": "Günlük şeker alımını azaltmaya çalışıyor." },
+            { "no": 208, "phrasal_verb": "cut out", "meaning": "kesip çıkarmak, yemeyi bırakmak, dışarıda tutmak", "sentence": "The doctor advised him to cut out fatty foods completely.", "sentence_tr": "Doktor ona yağlı yiyecekleri yemeyi tamamen bırakmasını tavsiye etti." },
+            { "no": 209, "phrasal_verb": "design for", "meaning": "...için tasarlamak", "sentence": "This online course is designed for YDS exam preparation.", "sentence_tr": "Bu çevrimiçi kurs YDS sınavı hazırlığı için tasarlanmıştır." },
+            { "no": 210, "phrasal_verb": "dispose of", "meaning": "atmak", "sentence": "Hospitals must dispose of medical waste safely.", "sentence_tr": "Hastaneler tıbbi atıkları güvenli bir şekilde atmalıdır." },
+            { "no": 211, "phrasal_verb": "fall back", "meaning": "geri çekilmek", "sentence": "The army was forced to fall back to safer positions.", "sentence_tr": "Ordu daha güvenli mevzilere geri çekilmek zorunda kaldı." },
+            { "no": 212, "phrasal_verb": "fall off", "meaning": "düşmek", "sentence": "Sales usually fall off during the winter season.", "sentence_tr": "Satışlar genellikle kış mevsiminde düşer." }
+       
+              ];
+
+        /* =========================================================================
+           2. STATE MANAGEMENT
+           ========================================================================= */
+        let activeDeck = [];
+        let knownList = [];
+        let unknownList = [];
+        let activeTab = 'deck';
+        let isFlipped = false;
+
+        function loadSavedState() {
+            try {
+                const savedKnown = localStorage.getItem('pv_known_list_v2');
+                const savedUnknown = localStorage.getItem('pv_unknown_list_v2');
+
+                knownList = savedKnown ? JSON.parse(savedKnown) : [];
+                unknownList = savedUnknown ? JSON.parse(savedUnknown) : [];
+
+                const processedIds = new Set([...knownList.map(i => i.no), ...unknownList.map(i => i.no)]);
+                activeDeck = phrasalData.filter(item => !processedIds.has(item.no));
+            } catch (e) {
+                activeDeck = [...phrasalData];
+                knownList = [];
+                unknownList = [];
+            }
+
+            updateBadgesAndProgress();
+        }
+
+        function saveState() {
+            localStorage.setItem('pv_known_list_v2', JSON.stringify(knownList));
+            localStorage.setItem('pv_unknown_list_v2', JSON.stringify(unknownList));
+            updateBadgesAndProgress();
+        }
+
+        function updateBadgesAndProgress() {
+            document.getElementById('badge-deck').textContent = activeDeck.length;
+            document.getElementById('badge-known').textContent = knownList.length;
+            document.getElementById('badge-unknown').textContent = unknownList.length;
+
+            const total = phrasalData.length;
+            const completed = knownList.length + unknownList.length;
+            const percent = Math.round((completed / total) * 100);
+
+            document.getElementById('progress-text').textContent = `${completed} / ${total} (%${percent})`;
+            document.getElementById('progress-bar').style.width = `${percent}%`;
+        }
+
+        /* =========================================================================
+           3. CARD RENDERING & FLIP LOGIC
+           ========================================================================= */
+        const cardFlipper = document.getElementById('card-flipper');
+        const emptyMsg = document.getElementById('empty-deck-msg');
+        const deckControls = document.getElementById('deck-controls');
+
+        function renderActiveCard() {
+            isFlipped = false;
+            cardFlipper.classList.remove('rotate-y-180');
+
+            if (activeDeck.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                deckControls.classList.add('opacity-40', 'pointer-events-none');
+                return;
+            }
+
+            emptyMsg.classList.add('hidden');
+            deckControls.classList.remove('opacity-40', 'pointer-events-none');
+
+            const current = activeDeck[0];
+            const totalCount = phrasalData.length;
+
+            // Front
+            document.getElementById('card-no').textContent = `#${current.no} / ${totalCount}`;
+            document.getElementById('card-phrasal').textContent = current.phrasal_verb;
+
+            // Back
+            document.getElementById('card-no-back').textContent = `#${current.no} / ${totalCount}`;
+            document.getElementById('card-meaning').textContent = current.meaning;
+            document.getElementById('card-sentence').textContent = current.sentence ? `"${current.sentence}"` : '';
+            document.getElementById('card-sentence-tr').textContent = current.sentence_tr || '';
+        }
+
+        function flipCard() {
+            if (activeDeck.length === 0) return;
+            isFlipped = !isFlipped;
+            if (isFlipped) {
+                cardFlipper.classList.add('rotate-y-180');
+            } else {
+                cardFlipper.classList.remove('rotate-y-180');
+            }
+        }
+
+        /* =========================================================================
+           4. SWIPE MECHANICS (MOUSE & TOUCH)
+           ========================================================================= */
+        const cardElement = document.getElementById('active-card');
+        const stampKnown = document.getElementById('stamp-known');
+        const stampUnknown = document.getElementById('stamp-unknown');
+
+        let isDragging = false;
+        let hasMoved = false;
+        let startX = 0, startY = 0;
+        let currentX = 0, currentY = 0;
+
+        function initSwipeEvents() {
+            // Mouse Events
+            cardElement.addEventListener('mousedown', startDrag);
+            window.addEventListener('mousemove', drag);
+            window.addEventListener('mouseup', endDrag);
+
+            // Touch Events
+            cardElement.addEventListener('touchstart', startDrag, { passive: true });
+            window.addEventListener('touchmove', drag, { passive: true });
+            window.addEventListener('touchend', endDrag);
+        }
+
+        function startDrag(e) {
+            if (activeDeck.length === 0) return;
+            isDragging = true;
+            hasMoved = false;
+            cardElement.classList.add('swiping');
+            cardElement.classList.remove('swipe-animate');
+
+            startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            startY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+        }
+
+        function drag(e) {
+            if (!isDragging) return;
+
+            const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+            const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+            currentX = clientX - startX;
+            currentY = clientY - startY;
+
+            if (Math.abs(currentX) > 8 || Math.abs(currentY) > 8) {
+                hasMoved = true;
+            }
+
+            const rotate = currentX * 0.08;
+            cardElement.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) rotate(${rotate}deg)`;
+
+            // Show Stamps Feedback
+            if (currentX < -40) {
+                // Sola Sürükle -> Biliyorum
+                stampKnown.style.opacity = Math.min(Math.abs(currentX) / 120, 1);
+                stampUnknown.style.opacity = 0;
+            } else if (currentX > 40) {
+                // Sağa Sürükle -> Bilmiyorum
+                stampUnknown.style.opacity = Math.min(Math.abs(currentX) / 120, 1);
+                stampKnown.style.opacity = 0;
+            } else {
+                stampKnown.style.opacity = 0;
+                stampUnknown.style.opacity = 0;
+            }
+        }
+
+        function endDrag() {
+            if (!isDragging) return;
+            isDragging = false;
+            cardElement.classList.remove('swiping');
+
+            const threshold = 100;
+
+            if (currentX < -threshold) {
+                completeSwipe('left');
+            } else if (currentX > threshold) {
+                completeSwipe('right');
+            } else {
+                resetCardPosition();
+            }
+
+            stampKnown.style.opacity = 0;
+            stampUnknown.style.opacity = 0;
+        }
+
+        function handleCardClick(e) {
+            if (hasMoved) {
+                hasMoved = false;
+                return;
+            }
+            flipCard();
+        }
+
+        function resetCardPosition() {
+            cardElement.classList.add('swipe-animate');
+            cardElement.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+            currentX = 0;
+            currentY = 0;
+        }
+
+        function completeSwipe(direction) {
+            if (activeDeck.length === 0) return;
+
+            cardElement.classList.add('swipe-animate');
+            const flyOutX = direction === 'left' ? -window.innerWidth : window.innerWidth;
+            cardElement.style.transform = `translate3d(${flyOutX}px, ${currentY}px, 0) rotate(${direction === 'left' ? -25 : 25}deg)`;
+
+            const swipedCard = activeDeck.shift();
+
+            if (direction === 'left') {
+                knownList.push(swipedCard);
+            } else {
+                unknownList.push(swipedCard);
+            }
+
+            saveState();
+
+            setTimeout(() => {
+                cardElement.classList.remove('swipe-animate');
+                cardElement.style.transform = 'translate3d(0, 0, 0) rotate(0deg)';
+                currentX = 0;
+                currentY = 0;
+                renderActiveCard();
+            }, 300);
+        }
+
+        function handleManualSwipe(direction) {
+            if (activeDeck.length === 0) return;
+            completeSwipe(direction);
+        }
+
+        /* =========================================================================
+           5. SPEECH SYNTHESIS (TTS)
+           ========================================================================= */
+        function speakText(event, type) {
+            if (event) event.stopPropagation();
+            if (activeDeck.length === 0) return;
+
+            const current = activeDeck[0];
+            const textToSpeak = type === 'phrasal' ? current.phrasal_verb : current.sentence;
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop current playing speech
+                const utterance = new SpeechSynthesisUtterance(textToSpeak);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        /* =========================================================================
+           6. TAB NAVIGATION & SAVED LIST VIEWS
+           ========================================================================= */
+        function switchTab(tab) {
+            activeTab = tab;
+
+            const deckView = document.getElementById('view-deck');
+            const listView = document.getElementById('view-list');
+
+            const btnDeck = document.getElementById('tab-deck');
+            const btnKnown = document.getElementById('tab-known');
+            const btnUnknown = document.getElementById('tab-unknown');
+
+            // Reset tab styles
+            [btnDeck, btnKnown, btnUnknown].forEach(btn => {
+                btn.className = "px-3.5 py-1.5 rounded-lg font-medium transition-all flex items-center gap-2 text-slate-400 hover:text-white";
+            });
+
+            if (tab === 'deck') {
+                btnDeck.className = "px-3.5 py-1.5 rounded-xl font-medium transition-all flex items-center gap-2 text-indigo-400 bg-indigo-500/10 border border-indigo-500/30 shadow-sm";
+                deckView.classList.remove('hidden');
+                listView.classList.add('hidden');
+                renderActiveCard();
+            } else {
+                deckView.classList.add('hidden');
+                listView.classList.remove('hidden');
+
+                if (tab === 'known') {
+                    btnKnown.className = "px-3.5 py-1.5 rounded-xl font-medium transition-all flex items-center gap-2 text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 shadow-sm";
+                    renderListView('known');
+                } else if (tab === 'unknown') {
+                    btnUnknown.className = "px-3.5 py-1.5 rounded-xl font-medium transition-all flex items-center gap-2 text-rose-400 bg-rose-500/10 border border-rose-500/30 shadow-sm";
+                    renderListView('unknown');
+                }
+            }
+        }
+
+        function renderListView(type) {
+            const grid = document.getElementById('list-grid');
+            const emptyState = document.getElementById('list-empty-state');
+            const title = document.getElementById('list-title');
+            const countBadge = document.getElementById('list-count-badge');
+            const searchInput = document.getElementById('list-search');
+
+            searchInput.value = '';
+
+            const listData = type === 'known' ? knownList : unknownList;
+
+            title.textContent = type === 'known' ? 'Bildiklerim Listesi' : 'Bilmediklerim Listesi';
+            countBadge.textContent = listData.length;
+
+            if (type === 'known') {
+                countBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30";
+            } else {
+                countBadge.className = "px-2.5 py-0.5 rounded-full text-xs font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30";
+            }
+
+            populateListItems(listData, type);
+        }
+
+        function populateListItems(items, type) {
+            const grid = document.getElementById('list-grid');
+            const emptyState = document.getElementById('list-empty-state');
+
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            items.forEach((item) => {
+                const cardNode = document.createElement('div');
+                cardNode.className = "glass-card p-4 rounded-2xl border border-slate-800 flex flex-col justify-between space-y-3 relative group hover:border-indigo-500/40 transition-all";
+
+                cardNode.innerHTML = `
+                    <div class="flex items-start justify-between gap-2">
+                        <div>
+                            <span class="text-[10px] font-mono font-bold text-indigo-400 px-2 py-0.5 rounded bg-indigo-500/10 border border-indigo-500/20">#${item.no}</span>
+                            <h4 class="text-base font-extrabold text-white mt-1.5">${item.phrasal_verb}</h4>
+                        </div>
+                        
+                        <div class="flex items-center gap-1">
+                            <button onclick="speakListSentence('${item.phrasal_verb}')" class="text-xs text-slate-400 hover:text-indigo-300 p-1.5 rounded-lg hover:bg-slate-800 transition-colors" title="Dinle">
+                                <i class="fa-solid fa-volume-high"></i>
+                            </button>
+                            <button onclick="moveBackToDeck(${item.no}, '${type}')" class="text-xs text-slate-400 hover:text-indigo-400 p-1.5 rounded-lg hover:bg-slate-800 transition-colors" title="Desteye Geri Gönder">
+                                <i class="fa-solid fa-rotate-left"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <p class="text-xs font-semibold text-amber-300 leading-relaxed">${item.meaning}</p>
+
+                    <div class="bg-slate-900/80 p-2.5 rounded-xl border border-slate-800/80 text-xs text-slate-300 italic">
+                        "${item.sentence}"
+                        <div class="text-[11px] text-slate-400 not-italic pt-1 mt-1 border-t border-slate-800">${item.sentence_tr}</div>
+                    </div>
+                `;
+
+                grid.appendChild(cardNode);
+            });
+        }
+
+        function filterListView() {
+            const query = document.getElementById('list-search').value.toLowerCase().trim();
+            const listData = activeTab === 'known' ? knownList : unknownList;
+
+            const filtered = listData.filter(item => 
+                item.phrasal_verb.toLowerCase().includes(query) || 
+                item.meaning.toLowerCase().includes(query)
+            );
+
+            populateListItems(filtered, activeTab);
+        }
+
+        function speakListSentence(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        function moveBackToDeck(itemNo, currentType) {
+            if (currentType === 'known') {
+                const idx = knownList.findIndex(i => i.no === itemNo);
+                if (idx !== -1) {
+                    const [removed] = knownList.splice(idx, 1);
+                    activeDeck.push(removed);
+                }
+            } else {
+                const idx = unknownList.findIndex(i => i.no === itemNo);
+                if (idx !== -1) {
+                    const [removed] = unknownList.splice(idx, 1);
+                    activeDeck.push(removed);
+                }
+            }
+
+            // Keep deck sorted by #
+            activeDeck.sort((a, b) => a.no - b.no);
+
+            saveState();
+            renderListView(currentType);
+        }
+
+        /* =========================================================================
+           7. MODAL RESET LOGIC (NO ALERT/CONFIRM)
+           ========================================================================= */
+        function showResetConfirmModal() {
+            document.getElementById('reset-modal').classList.remove('hidden');
+        }
+
+        function closeResetModal() {
+            document.getElementById('reset-modal').classList.add('hidden');
+        }
+
+        function confirmResetProgress() {
+            localStorage.removeItem('pv_known_list_v2');
+            localStorage.removeItem('pv_unknown_list_v2');
+            knownList = [];
+            unknownList = [];
+            activeDeck = [...phrasalData];
+            
+            saveState();
+            closeResetModal();
+
+            if (activeTab === 'deck') {
+                renderActiveCard();
+            } else {
+                renderListView(activeTab);
+            }
+        }
+
+        /* =========================================================================
+           8. INITIALIZATION ON LOAD
+           ========================================================================= */
+        window.onload = function () {
+            loadSavedState();
+            initSwipeEvents();
+            renderActiveCard();
+        };
+    </script>
+</body>
+</html>
