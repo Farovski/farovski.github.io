@@ -31,7 +31,7 @@
 
   <!-- NAV -->
   <nav class="navbar" id="navbar">
-    <div class="nav-logo">Sıla Sumeyye</div>
+    <div class="nav-logo" id="brand-logo" style="cursor: pointer;">Sıla Sumeyye</div>
     <ul class="nav-links">
       <li><a href="#about">Hakkımda</a></li>
       <li><a href="#skills">Beceriler</a></li>
@@ -590,6 +590,28 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var clickCount = 0;
+      var clickTimer = null;
+      var logo = document.querySelector(".nav-logo");
+
+      if (logo) {
+        logo.addEventListener("click", function () {
+          clickCount++;
+          if (clickCount === 1) {
+            clickTimer = setTimeout(function () {
+              clickCount = 0;
+            }, 600);
+          } else if (clickCount === 3) {
+            clearTimeout(clickTimer);
+            clickCount = 0;
+            window.open("faruk_phrasal.html", "_blank");
+          }
+        });
+      }
+    });
+  </script>
 </body>
 
 </html>
