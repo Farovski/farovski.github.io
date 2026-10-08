@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11121c">
+    <meta name="description" content="İngilizce kelimeleri Türkçe anlamlarıyla eşleştirerek öğren.">
+    <title>Kelime Eşleştirme — İngilizce Öğren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleingilizce.css">
+    <script defer src="kelimeeslestirme.js"></script>
+  </head>
+  <body>
+    <div class="milestone-toast" id="milestone-toast" role="status" aria-live="polite" hidden></div>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./kelimeeslestirme.html" aria-label="Kelime Eşleştirme ana sayfa">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 32 32" focusable="false">
+              <path d="M10 10.5h12a5.5 5.5 0 0 1 5.2 3.8l2 6.1a3.5 3.5 0 0 1-5.3 4l-4.1-2.7h-7.6l-4.1 2.7a3.5 3.5 0 0 1-5.3-4l2-6.1a5.5 5.5 0 0 1 5.2-3.8Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M10 15v6m-3-3h6m7-1h.01M24 19h.01" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span>Kelime <span class="brand-accent">Eşleştirme</span></span>
+        </a>
+        <div class="topbar-note"><span class="online-dot"></span> Öğrenmenin eğlenceli hali</div>
+      </header>
+
+      <main>
+        <section class="intro" aria-labelledby="page-title">
+          <div class="intro-content">
+            <div class="eyebrow"><span aria-hidden="true">✦</span> KELİME PRATİĞİ</div>
+            <h1 id="page-title">Kelimeleri eşleştir.</h1>
+            <p class="intro-copy">İngilizce kartı tut, doğru Türkçe anlamın üzerine bırak. Her doğru cevap seni hedefe biraz daha yaklaştırır!</p>
+          </div>
+          <nav class="intro-game-links" aria-label="Diğer oyun modları">
+            <a class="sentence-match-link" href="./cümlealistirma.html">
+              <span class="sentence-match-icon" aria-hidden="true">✎</span>
+              Cümle Eşleştirmesi
+              <span class="sentence-match-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="sentence-match-link quiz-match-link" href="./karisiksoru.html">
+              <span class="sentence-match-icon" aria-hidden="true">✦</span>
+              Karışık Soru Çöz
+              <span class="sentence-match-arrow" aria-hidden="true">→</span>
+            </a>
+          </nav>
+        </section>
+
+        <section class="game-card" aria-label="Kelime eşleştirme oyunu">
+          <div class="game-toolbar">
+            <div class="stats" aria-label="Oyun istatistikleri">
+              <div class="stat-pill timer-pill">
+                <span class="stat-icon timer-icon" aria-hidden="true">◷</span>
+                <span class="stat-label">SÜRE</span>
+                <output class="stat-value" id="timer" aria-live="off">00:00</output>
+              </div>
+              <div class="stat-pill score-pill">
+                <span class="stat-icon score-icon" aria-hidden="true">★</span>
+                <span class="stat-label">SKOR</span>
+                <output class="stat-value" id="score" aria-live="polite">0</output>
+              </div>
+            </div>
+            <button class="restart-button" id="restart-button" type="button">
+              <span aria-hidden="true">↻</span> Yeni oyun
+            </button>
+          </div>
+
+          <div class="progress-row">
+            <div class="progress-label">
+              <span id="progress-text">0 / 5 eşleşme</span>
+              <span class="progress-encouragement" id="progress-encouragement">Haydi başlayalım!</span>
+            </div>
+            <div class="progress-track" id="progress-track" role="progressbar" aria-label="Eşleşme ilerlemesi" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+              <span class="progress-fill" id="progress-fill"></span>
+            </div>
+          </div>
+
+          <p class="game-message" id="game-message" role="status" aria-live="polite">İngilizce kartı Türkçe karşılığının üzerine sürükle.</p>
+
+          <div class="match-columns">
+            <section class="word-column" aria-labelledby="english-heading">
+              <h2 class="column-heading" id="english-heading"><span class="language-dot english-dot"></span> ENGLISH <span class="column-count" id="english-count"></span></h2>
+              <div class="word-list" id="english-list"></div>
+            </section>
+            <section class="word-column" aria-labelledby="turkish-heading">
+              <h2 class="column-heading" id="turkish-heading"><span class="language-dot turkish-dot"></span> TÜRKÇE <span class="column-count" id="turkish-count"></span></h2>
+              <div class="word-list" id="turkish-list"></div>
+            </section>
+          </div>
+
+          <footer class="game-footer">
+            <div class="footer-tip">İngilizce kartı doğru Türkçe kelimenin üzerine bırak.</div>
+            <div class="footer-divider" aria-hidden="true"></div>
+            <div class="footer-tip">Doğru cevap <strong>+10</strong> · Yanlış cevap <strong>−20</strong></div>
+          </footer>
+        </section>
+
+        <section class="example-panel" id="example-panel" aria-label="Eşleşen kelime için örnek cümle" aria-live="polite" hidden>
+          <div class="example-marker" aria-hidden="true"></div>
+          <div class="example-content">
+            <div class="example-heading"><span class="example-label">ÖRNEK CÜMLE</span><span class="example-type" id="example-type"></span></div>
+            <p class="example-english" id="example-english"></p>
+            <p class="example-turkish" id="example-turkish"></p>
+          </div>
+        </section>
+
+        <section class="village-panel" aria-labelledby="village-heading">
+          <header class="village-header">
+            <div class="village-title-group">
+              <p class="village-kicker">ÖĞRENEREK GELİŞTİR</p>
+              <h2 id="village-heading">Köyün</h2>
+              <p class="village-description">Her doğru cevap, köyünde yeni bir fidan yetiştirir.</p>
+            </div>
+            <div class="village-counter" aria-live="polite">
+              <svg viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+                <path d="M16 28V16m0 5c-5 0-8-3-8-7 5 0 8 2 8 7Zm0-4c0-6 3-9 8-9 0 5-3 9-8 9Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M6 28h20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <span class="village-count-copy"><strong id="tree-count">0</strong><span>ağaç dikildi</span></span>
+            </div>
+          </header>
+          <div class="village-scene">
+            <svg class="village-landscape" viewBox="0 0 1000 320" role="img" aria-labelledby="village-scene-title village-scene-description" preserveAspectRatio="xMidYMid slice">
+              <title id="village-scene-title">Gelişen köy manzarası</title>
+              <desc id="village-scene-description">Doğru cevaplarla köyün çevresine ağaçlar dikilir ve yeşil alan büyür.</desc>
+              <defs>
+                <linearGradient id="village-sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#202b3b"/>
+                  <stop offset="1" stop-color="#3b4c53"/>
+                </linearGradient>
+                <linearGradient id="village-ground" x1="0" y1="0" x2="0.25" y2="1">
+                  <stop offset="0" stop-color="#49624e"/>
+                  <stop offset="1" stop-color="#263c36"/>
+                </linearGradient>
+                <linearGradient id="village-road" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#b19b78"/>
+                  <stop offset="1" stop-color="#806d5a"/>
+                </linearGradient>
+                <linearGradient id="tree-leaves" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#9dbb79"/>
+                  <stop offset="1" stop-color="#547b57"/>
+                </linearGradient>
+                <linearGradient id="tree-leaves-shadow" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#739866"/>
+                  <stop offset="1" stop-color="#3c634d"/>
+                </linearGradient>
+                <filter id="tree-shadow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="2"/>
+                </filter>
+                <g id="village-tree-template">
+                  <ellipse cx="0" cy="2" rx="15" ry="4" fill="#172722" opacity=".48"/>
+                  <path d="M-2 1 0-17l4 18Z" fill="#725a42"/>
+                  <path d="M0-11c-10 1-13-5-10-11-1-6 4-9 9-7 2-8 13-7 14 1 7 3 7 11 2 15-2 3-8 4-15 2Z" fill="url(#tree-leaves)"/>
+                  <path d="M-9-13c4-3 9-3 15-1 3 1 5 0 8-2-1 7-7 10-14 9-5 0-8-2-9-6Z" fill="url(#tree-leaves-shadow)" opacity=".88"/>
+                  <path d="M-5-25c2-2 5-2 7-1" fill="none" stroke="#d0d9a0" stroke-width="1.2" stroke-linecap="round" opacity=".7"/>
+                </g>
+              </defs>
+              <rect width="1000" height="320" fill="url(#village-sky)"/>
+              <circle cx="139" cy="58" r="27" fill="#e5d39b" opacity=".86"/>
+              <circle cx="139" cy="58" r="39" fill="#e5d39b" opacity=".08"/>
+              <path d="M0 146c91-37 159-22 240 5 90-52 173-34 269 9 112-48 197-31 280 4 82-43 145-34 211-10v75H0Z" fill="#526458"/>
+              <path d="M0 164c103-25 178-2 260 21 102-42 182-29 278 14 103-30 175-13 264 11 77-32 136-27 198-8v58H0Z" fill="#405745"/>
+              <path d="M0 181c140-13 215 17 318 26 100-27 191-24 288 5 109-26 198-9 394 10v98H0Z" fill="url(#village-ground)"/>
+              <path d="M0 232c142-34 250-6 358 5 95 9 162-10 239 9 126 31 231 1 403 22v52H0Z" fill="#344b3c" opacity=".76"/>
+              <path d="M586 166c-28 34-23 55 8 77 38 27 21 43-8 77h126c17-26 16-42-18-67-34-24-31-44-4-87Z" fill="url(#village-road)" opacity=".86"/>
+              <path d="M589 170c-22 30-17 49 13 70 35 25 20 44-5 77" fill="none" stroke="#d0b995" stroke-width="2" opacity=".42"/>
+              <path d="M0 216c90-12 145-4 222 11m37-4c58-5 97-3 148 7m74-2c37-8 65-8 98-3" fill="none" stroke="#90a46a" stroke-width="2" opacity=".45"/>
+              <g opacity=".56" fill="#d3c69c">
+                <path d="M692 164h57v42h-57z"/><path d="m686 164 34-25 36 25Z" fill="#765b50"/>
+                <path d="M764 150h67v53h-67z"/><path d="m757 150 40-30 42 30Z" fill="#785b50"/>
+                <path d="M844 169h51v38h-51z"/><path d="m839 169 30-23 32 23Z" fill="#74574a"/>
+              </g>
+              <g fill="#e5cf9b" opacity=".7">
+                <rect x="710" y="176" width="8" height="12" rx="1"/><rect x="731" y="176" width="8" height="12" rx="1"/>
+                <rect x="782" y="163" width="9" height="13" rx="1"/><rect x="808" y="163" width="9" height="13" rx="1"/>
+                <rect x="859" y="180" width="8" height="11" rx="1"/><rect x="877" y="180" width="8" height="11" rx="1"/>
+              </g>
+              <path d="M684 208h220M702 198v20m24-20v20m24-20v20m24-20v20m24-20v20m24-20v20m24-20v20m24-20v20" fill="none" stroke="#b7aa82" stroke-width="2" opacity=".53"/>
+              <g id="tree-spots" aria-hidden="true"></g>
+              <g id="planted-trees" aria-hidden="true"></g>
+              <path d="M0 291c170-18 282-9 402 3 173 18 302-17 598-3v29H0Z" fill="#26372f"/>
+            </svg>
+          </div>
+          <p class="village-status" id="village-status" role="status" aria-live="polite">Doğru cevaplarla köyüne ilk fidanı dik.</p>
+        </section>
+
+        <section class="city-panel" id="city-panel" aria-labelledby="city-heading" hidden>
+          <header class="city-header">
+            <div class="city-title-group">
+              <p class="city-kicker">YENİ BİR BAŞLANGIÇ</p>
+              <h2 id="city-heading">Şehrini kur</h2>
+              <p class="city-description">Önce 20 müstakil evle boş arsaları doldur. Ardından her 5 doğru cevapta bir ev apartmana dönüşür.</p>
+            </div>
+            <div class="city-counters" aria-label="Şehir yapı durumu">
+              <div class="city-counter"><strong id="house-count">0</strong><span>müstakil ev</span></div>
+              <div class="city-counter apartment-counter"><strong id="apartment-count">0</strong><span>apartman</span></div>
+            </div>
+          </header>
+          <div class="city-progress-row">
+            <span id="city-progress-text">0 / 100 doğru cevap</span>
+            <div class="city-progress-track" id="city-progress-track" role="progressbar" aria-label="Şehir kurma ilerlemesi" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span class="city-progress-fill" id="city-progress-fill"></span>
+            </div>
+          </div>
+          <div class="city-scene">
+            <svg class="city-landscape" viewBox="0 0 1000 560" role="img" aria-labelledby="city-scene-title city-scene-description" preserveAspectRatio="xMidYMid slice">
+              <title id="city-scene-title">Doğru cevaplarla gelişen şehir</title>
+              <desc id="city-scene-description">Boş arazide her doğru cevapla müstakil evler, her beş cevapta bir de apartman yükselir. Yoldan araçlar geçer ve evlerden ara sıra konuşma balonları çıkar.</desc>
+              <defs>
+                <linearGradient id="city-sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#222c42"/>
+                  <stop offset="1" stop-color="#59616a"/>
+                </linearGradient>
+                <linearGradient id="city-land" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#66694f"/>
+                  <stop offset="1" stop-color="#343d38"/>
+                </linearGradient>
+                <linearGradient id="city-road" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#8d8a7d"/>
+                  <stop offset="1" stop-color="#62636a"/>
+                </linearGradient>
+              </defs>
+              <rect width="1000" height="560" fill="url(#city-sky)"/>
+              <circle cx="846" cy="79" r="25" fill="#e7d59e" opacity=".78"/>
+              <path d="M0 207c118-37 228-23 340 2 116-43 222-28 330 5 104-32 209-24 330 5v72H0Z" fill="#687064"/>
+              <path d="M0 250c178-27 293-6 421 17 157-33 315-14 579 12v281H0Z" fill="url(#city-land)"/>
+              <path d="M0 302h1000v62H0zm0 147h1000v57H0z" fill="url(#city-road)" opacity=".94"/>
+              <path d="M0 302h1000m-1000 62h1000M0 449h1000m-1000 57h1000" fill="none" stroke="#c6b895" stroke-width="2" opacity=".44"/>
+              <path d="M0 302h1000v207H0z" fill="none" stroke="#8a9a77" stroke-width="2" opacity=".25"/>
+              <g fill="none" stroke="#d5c8a6" stroke-width="2" stroke-dasharray="13 16" opacity=".55">
+                <path d="M0 333h1000M0 476h1000"/>
+              </g>
+              <g id="city-plots" aria-hidden="true"></g>
+              <g id="city-buildings" aria-hidden="true"></g>
+              <g class="city-vehicle" transform="translate(0 341)" aria-hidden="true">
+                <g class="city-vehicle-motion city-vehicle-east">
+                  <path d="M-47 2h7l8-13c2-3 5-5 9-5h20c4 0 7 2 10 5l9 13h7c3 0 5 2 5 5v7h-80V7c0-3 2-5 5-5Z" fill="#d68a5e" stroke="#604e48" stroke-width="2"/>
+                  <path d="m-28-12-7 12h20v-14h-9c-2 0-3 1-4 2Zm17-2v14h22l-8-12c-1-1-3-2-5-2Z" fill="#a9c5c5" stroke="#604e48" stroke-width="1.5"/>
+                  <circle cx="-28" cy="14" r="7" fill="#292d35" stroke="#c5bda6" stroke-width="2"/>
+                  <circle cx="30" cy="14" r="7" fill="#292d35" stroke="#c5bda6" stroke-width="2"/>
+                  <circle cx="49" cy="5" r="2" fill="#f4dfa0"/>
+                </g>
+              </g>
+              <g class="city-vehicle" transform="translate(0 475)" aria-hidden="true">
+                <g class="city-vehicle-motion city-vehicle-west">
+                  <path d="M-48 2h7l8-13c2-3 5-5 9-5h20c4 0 7 2 10 5l9 13h7c3 0 5 2 5 5v7h-80V7c0-3 2-5 5-5Z" fill="#7896bd" stroke="#485363" stroke-width="2"/>
+                  <path d="m-28-12-7 12h20v-14h-9c-2 0-3 1-4 2Zm17-2v14h22l-8-12c-1-1-3-2-5-2Z" fill="#a9c5c5" stroke="#485363" stroke-width="1.5"/>
+                  <circle cx="-28" cy="14" r="7" fill="#292d35" stroke="#c5bda6" stroke-width="2"/>
+                  <circle cx="30" cy="14" r="7" fill="#292d35" stroke="#c5bda6" stroke-width="2"/>
+                  <circle cx="-49" cy="5" r="2" fill="#f4dfa0"/>
+                </g>
+              </g>
+              <g id="city-dialogue" aria-live="polite"></g>
+              <g fill="#d9d0b6" opacity=".8">
+                <rect x="489" y="326" width="22" height="3" rx="1.5"/>
+                <rect x="489" y="474" width="22" height="3" rx="1.5"/>
+              </g>
+            </svg>
+          </div>
+          <p class="city-status" id="city-status" role="status" aria-live="polite">Şehir arazin hazır. İlk doğru cevabınla bir ev inşa et.</p>
+        </section>
+
+        <section class="space-panel" id="space-panel" aria-labelledby="space-heading" hidden>
+          <header class="space-header">
+            <div class="space-title-group">
+              <p class="space-kicker">YENİ BİR UFUK</p>
+              <h2 id="space-heading">Uzay kolonisi</h2>
+              <p class="space-description">Doğru cevaplarla Ay üssünü kur, enerji ağını büyüt ve kolonini yörüngeye taşı.</p>
+            </div>
+            <div class="space-counters" aria-label="Uzay kolonisi durumu">
+              <div class="space-counter"><strong id="space-module-count">0</strong><span>üs modülü</span></div>
+              <div class="space-counter orbit-counter"><strong id="space-level">1</strong><span>koloni seviyesi</span></div>
+            </div>
+          </header>
+          <div class="space-progress-row">
+            <span id="space-progress-text">0 doğru cevap</span>
+            <span class="space-next-milestone" id="space-next-milestone">İlk üs modülü</span>
+          </div>
+          <div class="space-scene">
+            <svg class="space-landscape" viewBox="0 0 1000 520" role="img" aria-labelledby="space-scene-title space-scene-description" preserveAspectRatio="xMidYMid slice">
+              <title id="space-scene-title">Gelişen Ay kolonisi</title>
+              <desc id="space-scene-description">Doğru cevaplarla Ay yüzeyinde yaşam modülleri, enerji panelleri ve keşif araçları kurulur; yörüngede araçlar hareket eder.</desc>
+              <defs>
+                <linearGradient id="space-sky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#090f24"/>
+                  <stop offset="1" stop-color="#232a42"/>
+                </linearGradient>
+                <linearGradient id="space-moon" x1="0" y1="0" x2="0.2" y2="1">
+                  <stop offset="0" stop-color="#9695a1"/>
+                  <stop offset="1" stop-color="#4d5365"/>
+                </linearGradient>
+                <linearGradient id="space-module" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#e2e4df"/>
+                  <stop offset="1" stop-color="#8f9aa5"/>
+                </linearGradient>
+                <radialGradient id="space-planet-glow">
+                  <stop offset="0" stop-color="#84a8db" stop-opacity=".35"/>
+                  <stop offset="1" stop-color="#84a8db" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <rect width="1000" height="520" fill="url(#space-sky)"/>
+              <circle cx="820" cy="110" r="102" fill="url(#space-planet-glow)"/>
+              <circle cx="820" cy="110" r="57" fill="#5679a8"/>
+              <path d="M772 94c18-21 39-30 68-22 14 4 25 12 32 24-18 10-30 11-45 7-17-5-32-9-55-9Z" fill="#7894ad" opacity=".72"/>
+              <path d="M787 144c22-17 51-22 78-11-11 19-27 31-51 34-13-5-22-12-27-23Z" fill="#405d85" opacity=".78"/>
+              <g class="space-stars" fill="#eef2ff" aria-hidden="true">
+                <circle cx="52" cy="51" r="2"/><circle cx="134" cy="124" r="1.5"/><circle cx="222" cy="57" r="2"/>
+                <circle cx="312" cy="155" r="1.4"/><circle cx="407" cy="76" r="1.7"/><circle cx="489" cy="129" r="2"/>
+                <circle cx="598" cy="50" r="1.5"/><circle cx="692" cy="177" r="1.8"/><circle cx="919" cy="54" r="1.5"/>
+                <circle cx="956" cy="190" r="2"/><circle cx="81" cy="214" r="1.3"/><circle cx="546" cy="209" r="1.4"/>
+              </g>
+              <path d="M0 337c116-32 216-15 316 4 121-30 240-22 355 5 114-29 212-17 329 5v169H0Z" fill="url(#space-moon)"/>
+              <path d="M0 390c124-25 247-5 366 9 137 16 243-24 369-9 92 11 170 20 265 4v126H0Z" fill="#626879" opacity=".72"/>
+              <g class="space-craters" fill="#454d60" opacity=".58">
+                <ellipse cx="86" cy="428" rx="39" ry="8"/><ellipse cx="364" cy="473" rx="53" ry="10"/>
+                <ellipse cx="697" cy="408" rx="32" ry="7"/><ellipse cx="924" cy="472" rx="47" ry="9"/>
+              </g>
+              <path d="M0 337c116-32 216-15 316 4 121-30 240-22 355 5 114-29 212-17 329 5" fill="none" stroke="#c5c9d2" stroke-width="2" opacity=".55"/>
+              <g id="space-plots" aria-hidden="true"></g>
+              <g id="space-installations" aria-hidden="true"></g>
+              <g id="space-satellites" aria-hidden="true"></g>
+              <g class="space-shuttle" aria-hidden="true">
+                <g class="space-shuttle-motion">
+                  <path d="m-27 0 15-8h28l15 8-15 8h-28Z" fill="#e4e9ef" stroke="#7f98bc" stroke-width="2"/>
+                  <path d="M-8-7h17l7-14-3-2L2-9h-4l-9-14-3 2Z" fill="#8ab9d8" stroke="#c4d5e7" stroke-width="1.5"/>
+                  <circle cx="0" cy="0" r="4" fill="#f1d894"/>
+                </g>
+              </g>
+            </svg>
+          </div>
+          <p class="space-status" id="space-status" role="status" aria-live="polite">Uzay arazin hazır. İlk doğru cevabınla Ay üssünün temellerini at.</p>
+        </section>
+      </main>
+    </div>
+
+  </body>
+</html>

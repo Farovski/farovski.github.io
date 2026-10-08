@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11121c">
+    <meta name="description" content="Cümle eşleştirme oyunu.">
+    <title>Cümle Eşleştirmesi — İngilizce Öğren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleingilizce.css">
+    <script defer src="cümlealistirma.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./kelimeeslestirme.html" aria-label="Kelime eşleştirme oyununa dön">
+          <span class="brand-icon" aria-hidden="true">✦</span>
+          <span>Kelime <span class="brand-accent">Eşleştirme</span></span>
+        </a>
+        <div class="topbar-note"><span class="online-dot"></span> Öğrenmenin eğlenceli hali</div>
+      </header>
+
+      <main class="sentence-page-main">
+        <section class="sentence-game" aria-labelledby="sentence-page-title">
+          <header class="sentence-game-heading">
+            <div>
+              <div class="eyebrow"><span aria-hidden="true">✦</span> CÜMLE PRATİĞİ</div>
+              <h1 id="sentence-page-title">Cümle Eşleştirmesi</h1>
+              <p>İngilizce cümleyi oku, doğru Türkçe çeviriyi seç.</p>
+            </div>
+            <a class="sentence-page-back" href="./kelimeeslestirme.html">
+              <span aria-hidden="true">←</span>
+              Kelime oyununa dön
+            </a>
+          </header>
+
+          <section class="sentence-game-card" aria-label="Cümle eşleştirme oyunu">
+            <div class="sentence-toolbar">
+              <div class="sentence-stats" aria-label="Oyun istatistikleri">
+                <div class="sentence-stat">
+                  <span aria-hidden="true">◷</span>
+                  <span class="sentence-stat-label">SÜRE</span>
+                  <output id="sentence-timer" aria-live="off">00:00</output>
+                </div>
+                <div class="sentence-stat sentence-score">
+                  <span aria-hidden="true">★</span>
+                  <span class="sentence-stat-label">SKOR</span>
+                  <output id="sentence-score" aria-live="polite">0</output>
+                </div>
+              </div>
+              <button class="sentence-restart" id="sentence-restart" type="button">↻ Yeni tur</button>
+            </div>
+
+            <div class="sentence-progress">
+              <div class="sentence-progress-label">
+                <span id="sentence-progress-text">0 / 5 eşleşme</span>
+                <span id="sentence-progress-encouragement">Haydi başlayalım!</span>
+              </div>
+              <div class="sentence-progress-track" role="progressbar" aria-label="Cümle eşleştirme ilerlemesi" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+                <span id="sentence-progress-fill"></span>
+              </div>
+            </div>
+
+            <p class="sentence-message" id="sentence-message" role="status" aria-live="polite">Cümle listesinden bir İngilizce kart ve Türkçe çevirisini seç.</p>
+
+            <div class="sentence-columns">
+              <section class="sentence-column" aria-labelledby="english-sentences-heading">
+                <h2 id="english-sentences-heading"><span class="sentence-dot"></span> ENGLISH SENTENCES <span id="english-sentence-count">5</span></h2>
+                <div class="sentence-list" id="english-sentences"></div>
+              </section>
+              <section class="sentence-column" aria-labelledby="turkish-sentences-heading">
+                <h2 id="turkish-sentences-heading"><span class="sentence-dot turkish-sentence-dot"></span> TÜRKÇE ÇEVİRİLER <span id="turkish-sentence-count">5</span></h2>
+                <div class="sentence-list" id="turkish-sentences"></div>
+              </section>
+            </div>
+
+            <footer class="sentence-footer">
+              <span>Doğru cevap <strong>+10</strong></span>
+              <span aria-hidden="true">·</span>
+              <span>Yanlış cevap <strong>−20</strong></span>
+            </footer>
+          </section>
+        </section>
+      </main>
+    </div>
+    <div class="milestone-toast" id="sentence-milestone-toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

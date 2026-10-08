@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#11121c">
+    <meta name="description" content="İngilizce zamanlar ve dil bilgisi konularında rastgele sorular çöz.">
+    <title>Karışık Soru Çöz — İngilizce Öğren</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styleingilizce.css">
+    <script defer src="karisiksoru.js"></script>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <a class="brand" href="./kelimeeslestirme.html" aria-label="Kelime eşleştirme ana sayfa">
+          <span class="brand-icon" aria-hidden="true">✦</span>
+          <span>Kelime <span class="brand-accent">Eşleştirme</span></span>
+        </a>
+        <div class="topbar-note"><span class="online-dot"></span> Öğrenmenin eğlenceli hali</div>
+      </header>
+
+      <main class="quiz-page-main">
+        <section class="quiz-page" aria-labelledby="quiz-title">
+          <header class="quiz-page-heading">
+            <div>
+              <div class="eyebrow"><span aria-hidden="true">✦</span> KARIŞIK PRATİK</div>
+              <h1 id="quiz-title">Karışık Soru Çöz</h1>
+              <p>Her soruda farklı bir konu, her cevapta yeni bir şey öğren.</p>
+            </div>
+            <a class="sentence-page-back" href="./kelimeeslestirme.html">
+              <span aria-hidden="true">←</span>
+              Ana sayfaya dön
+            </a>
+          </header>
+
+          <section class="quiz-card" aria-label="İngilizce karışık soru oyunu">
+            <div class="quiz-toolbar">
+              <div class="quiz-stats" aria-label="Oyun istatistikleri">
+                <div class="quiz-stat">
+                  <span aria-hidden="true">◷</span>
+                  <span class="quiz-stat-label">SÜRE</span>
+                  <output id="quiz-timer" aria-live="off">00:00</output>
+                </div>
+                <div class="quiz-stat quiz-score">
+                  <span aria-hidden="true">★</span>
+                  <span class="quiz-stat-label">SKOR</span>
+                  <output id="quiz-score" aria-live="polite">0</output>
+                </div>
+              </div>
+              <div class="quiz-question-count" id="quiz-question-count">SORU 1</div>
+            </div>
+
+            <div class="quiz-content">
+              <div class="quiz-topic-row">
+                <span class="quiz-topic" id="quiz-topic">SORU HAVUZU YÜKLENİYOR</span>
+                <span class="quiz-random-badge"><span aria-hidden="true">✦</span> RASTGELE SORU</span>
+              </div>
+              <h2 class="quiz-question" id="quiz-question">Sorular yükleniyor...</h2>
+              <div class="quiz-options" id="quiz-options" role="group" aria-label="Cevap seçenekleri"></div>
+              <section class="quiz-feedback" id="quiz-feedback" aria-live="polite" hidden>
+                <div class="quiz-feedback-title" id="quiz-feedback-title"></div>
+                <p id="quiz-explanation"></p>
+              </section>
+              <div class="quiz-actions">
+                <p class="quiz-status" id="quiz-status" role="status" aria-live="polite">Soru havuzu yükleniyor...</p>
+                <button class="quiz-next-button" id="quiz-next" type="button" disabled>Sonraki soru <span aria-hidden="true">→</span></button>
+              </div>
+            </div>
+            <footer class="quiz-footer">
+              <span>Doğru cevap <strong>+10</strong></span>
+              <span aria-hidden="true">·</span>
+              <span>Yanlış cevap <strong>−20</strong></span>
+              <span class="quiz-footer-note">Sorular havuzun tamamından karışık seçilir</span>
+            </footer>
+          </section>
+        </section>
+      </main>
+    </div>
+    <div class="milestone-toast" id="quiz-milestone-toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>
