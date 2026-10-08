@@ -591,27 +591,40 @@
 
   <script src="script.js"></script>
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    // Esnek üçlü tıklama takip fonksiyonu
+    function attachTripleClick(selector, targetUrl) {
       var clickCount = 0;
       var clickTimer = null;
-      var logo = document.querySelector(".nav-logo");
+      var element = document.querySelector(selector);
 
-      if (logo) {
-        logo.addEventListener("click", function () {
+      if (element) {
+        // Tıklama sırasında metin seçimini engellemek için isteğe bağlı stil
+        element.style.userSelect = "none";
+        element.style.cursor = "pointer";
+
+        element.addEventListener("click", function (e) {
           clickCount++;
           if (clickCount === 1) {
             clickTimer = setTimeout(function () {
               clickCount = 0;
-            }, 600);
+            }, 600); // 600ms içinde 3 tık yapılmazsa sıfırla
           } else if (clickCount === 3) {
             clearTimeout(clickTimer);
             clickCount = 0;
-            window.open("faruk_phrasal.html", "_blank");
+            window.open(targetUrl, "_blank");
           }
         });
       }
-    });
-  </script>
+    }
+
+    // 1. Logo tıklaması -> faruk_phrasal.html
+    attachTripleClick(".nav-logo", "faruk_phrasal.html");
+
+    // 2. Karakaya (.highlight) tıklaması -> faruk_vocabulary.html
+    attachTripleClick(".highlight", "faruk_vocabulary.html");
+  });
+</script>
 </body>
 
 </html>
